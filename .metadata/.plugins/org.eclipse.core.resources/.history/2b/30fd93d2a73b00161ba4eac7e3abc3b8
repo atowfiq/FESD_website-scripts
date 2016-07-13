@@ -1,0 +1,21 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<jsp:include page="leftSidebar.jsp"/>
+
+<div class="main">
+<div class="page-header">
+	<h1><span >People</span> </h1>
+</div>
+	<ul><li><a href=""><img alt="thumbnail of Dr. Alexander V. Balatsky " src="../_assets/images/contact-balatsky.jpg"></a></li><li><strong>Institute Director</strong></li><li>Dr. Alexander V. Balatsky </li><li>Institute for Materials Science</li><li>(505) 665-0077</li><li><a href="mailto:avb@lanl.gov">
+                            Email                        
+    </a></li></ul>
+</div>
+</body>
+</html>

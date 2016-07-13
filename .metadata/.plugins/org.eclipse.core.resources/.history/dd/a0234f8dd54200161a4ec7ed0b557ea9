@@ -1,0 +1,171 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Element</title>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+
+<script type="text/javascript">
+var elementName,elementSymbol;
+
+$(document).ready(function(){
+	var atomicNo  = <%=request.getParameter("atomicNo")%>;
+	
+	$.get('ElementServlet', {
+		 AtomicNo : atomicNo
+	}, function(elementData) {
+		
+		elementName = elementData.ElementObj.Name;
+		elementSymbol = elementData.ElementObj.Symbol;
+		$('#elementName').text(elementData.ElementObj.Symbol);
+		$('#elementAtomicNo').text(elementData.ElementObj.AtomicNo);
+	
+		$.each(elementData.SpaceGroupCellSetting, function (key, value) {
+
+         $("#crystalSystem").append($("<option></option>").val
+            (value).html(value));
+        });
+		
+	});
+	CreateElementTextBox(1);
+	
+
+	var spaceGroupNumbers = [];
+	for(var i=1;i<=230;i++)
+	{
+		
+		spaceGroupNumbers.push(i.toString());
+		
+	}
+	
+	$( "#spaceGroupId" ).autocomplete({
+	      source: spaceGroupNumbers//elementPageData.SpaceGroupSymmetry
+	    });
+	
+	HandleSymmetrySelection($("#SymmetryTypeDropDown").val());
+	
+
+	
+});
+function CreateElementTextBox(val)
+{
+	$('#AdditionalElements').html('');
+	for(var i=0;i<val;i++)
+	{
+		$('#AdditionalElements').append("<div class='col-md-2'><input type='text' style='width:100px;' class='form-control additionalElm'/></div>");
+	}
+}
+function HandleShowAll(val)
+{
+	if(val.checked)
+	{	
+		$("#SymmetryTypeDropDown").attr("disabled","disabled");
+		HandleSymmetrySelection("NoType");
+	}
+	else
+	{	$("#SymmetryTypeDropDown").removeAttr("disabled");
+		HandleSymmetrySelection($("#SymmetryTypeDropDown").val());
+	
+	
+	}	
+
+}
+
+function HandleSymmetrySelection(symmetryType)
+{
+	$("#spaceGroupId").attr("disabled","disabled");
+	$("#spaceGroupId").val('');
+	
+	$("#crystalSystem").attr("disabled","disabled");
+	
+	
+	if(symmetryType=="SelectSpaceGroup")
+	{
+		$("#spaceGroupId").removeAttr("disabled");
+		
+	}
+	else if(symmetryType=="SelectCrystalSystem")
+	{
+		
+		$("#crystalSystem").removeAttr("disabled");
+		
+	}	
+	
+	
+}
+function SearchCompound()
+{
+	var atomicNo = <%=request.getParameter("atomicNo")%>;
+	var additionalElements='';
+	$.each($(".additionalElm"),function(key,elm){
+	
+		additionalElements =additionalElements +  elm.value+',';
+	});
+	additionalElements = additionalElements.substring(0, additionalElements.length-1);
+	
+	var isShowAll=$("#chkboxShowAll").is(':checked');
+	var crystalSystemVal='',spaceGroupVal=''
+	if(!isShowAll)
+	{  var sType =$('#SymmetryTypeDropDown').val()
+
+		if(sType =="SelectSpaceGroup")
+		{
+			spaceGroupVal= $("#spaceGroupId").val();
+		}
+		else if(sType =="SelectCrystalSystem")
+		{
+			
+			crystalSystemVal=$("#crystalSystem").val();
+		}	
+	}
+	var directTo = "\Compound.jsp?AtomicNo="+atomicNo+"&AE="+additionalElements +"&IsShowAll="+isShowAll+"&SpaceGroup="+spaceGroupVal+"&CrystalSystem="+crystalSystemVal+"&ElementName="+elementName+"&ElementSymbol="+elementSymbol;
+	location.href = directTo;
+}
+</script>
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+<script>
+function goBack() {
+    window.history.back();
+}
+</script>
+
+</head>
+<body>
+<jsp:include page="leftSidebar.jsp"/>
+<div class="main" >
+	<div style="float:right;"><button class="btn btn-secondary" onclick="goBack()">Go Back</button>
+	</div>
+	<div style="clear: both;"></div>
+	<h1><span  class="label label-default"><span id='elementName'></span><span id='elementAtomicNo'  class="badge">7</span></span> </h1>
+	<table>
+	<tr>
+		<td>
+		<button type="button" class="btn btn-default btn-sm">
+          <span class="glyphicon glyphicon-plus"></span> Additional Elements
+        </button>
+		</td>
+	</tr>
+	</table>
+
+	
+</div>
+</body>
+</html>

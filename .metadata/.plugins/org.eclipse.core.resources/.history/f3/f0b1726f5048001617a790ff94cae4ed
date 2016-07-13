@@ -1,0 +1,247 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Element</title>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+
+<script type="text/javascript">
+var elementName,elementSymbol;
+
+$(document).ready(function(){
+	var atomicNo  = <%=request.getParameter("atomicNo")%>;
+	
+	$.get('ElementServlet', {
+		 AtomicNo : atomicNo
+	}, function(elementData) {
+		
+		elementName = elementData.ElementObj.Name;
+		elementSymbol = elementData.ElementObj.Symbol;
+		
+		$.each($(".additionalElm"),function(key,elm){
+			
+			$( elm).autocomplete({
+			      source: elementData.AllElements//elementPageData.SpaceGroupSymmetry
+			    });
+		});
+		
+		
+		$('#elementName').text(elementName);
+		$('#elementAtomicNo').text("("+elementSymbol+"-"+elementData.ElementObj.AtomicNo+")");
+	
+		$.each(elementData.SpaceGroupCellSetting, function (key, value) {
+
+         $("#crystalSystem").append($("<option></option>").val
+            (value).html(value));
+        });
+		
+	});
+	CreateElementTextBox(1);
+	
+
+	var spaceGroupNumbers = [];
+	for(var i=1;i<=230;i++)
+	{
+		
+		spaceGroupNumbers.push(i.toString());
+		
+	}
+	
+	$( "#spaceGroupId" ).autocomplete({
+	      source: spaceGroupNumbers//elementPageData.SpaceGroupSymmetry
+	    });
+	
+	HandleSymmetrySelection($("#SymmetryTypeDropDown").val());
+	
+
+	
+});
+function CreateElementTextBox(val)
+{
+	$('#AdditionalElements').html('');
+	for(var i=0;i<val;i++)
+	{
+		$('#AdditionalElements').append("<div class='col-md-2'><input type='text' style='width:100px;' class='form-control additionalElm'/></div>");
+	}
+}
+function HandleShowAll(val)
+{
+	if(val.checked)
+	{	
+		$("#SymmetryTypeDropDown").attr("disabled","disabled");
+		HandleSymmetrySelection("NoType");
+	}
+	else
+	{	$("#SymmetryTypeDropDown").removeAttr("disabled");
+		HandleSymmetrySelection($("#SymmetryTypeDropDown").val());
+	
+	
+	}	
+
+}
+
+function HandleSymmetrySelection(symmetryType)
+{
+	$("#spaceGroupId").attr("disabled","disabled");
+	$("#spaceGroupId").val('');
+	
+	$("#crystalSystem").attr("disabled","disabled");
+	
+	
+	if(symmetryType=="SelectSpaceGroup")
+	{
+		$("#spaceGroupId").removeAttr("disabled");
+		
+	}
+	else if(symmetryType=="SelectCrystalSystem")
+	{
+		
+		$("#crystalSystem").removeAttr("disabled");
+		
+	}	
+	
+	
+}
+function SearchCompound()
+{
+	var atomicNo = <%=request.getParameter("atomicNo")%>;
+	var additionalElements='';
+	$.each($(".additionalElm"),function(key,elm){
+	
+		additionalElements =additionalElements +  elm.value+',';
+	});
+	additionalElements = additionalElements.substring(0, additionalElements.length-1);
+	
+	var isShowAll=$("#chkboxShowAll").is(':checked');
+	var crystalSystemVal='',spaceGroupVal=''
+	if(!isShowAll)
+	{  var sType =$('#SymmetryTypeDropDown').val()
+
+		if(sType =="SelectSpaceGroup")
+		{
+			spaceGroupVal= $("#spaceGroupId").val();
+		}
+		else if(sType =="SelectCrystalSystem")
+		{
+			
+			crystalSystemVal=$("#crystalSystem").val();
+		}	
+	}
+	var directTo = "\Compound.jsp?AtomicNo="+atomicNo+"&AE="+additionalElements +"&IsShowAll="+isShowAll+"&SpaceGroup="+spaceGroupVal+"&CrystalSystem="+crystalSystemVal+"&ElementName="+elementName+"&ElementSymbol="+elementSymbol;
+	location.href = directTo;
+}
+
+function AddElement()
+{
+	var elementTextBox = $(".additionalElm:hidden");
+	$(elementTextBox[0]).show();
+	$("#RemoveBtn").removeAttr("disabled");		
+	if(elementTextBox.length==1)
+	{
+		$("#AddBtn").attr("disabled","disabled");
+			
+	}
+	
+}
+
+function RemoveElement()
+{
+	var elementTextBox = $(".additionalElm:visible");
+	$(elementTextBox[elementTextBox.length-1]).val("");
+	$(elementTextBox[elementTextBox.length-1]).hide();
+	$("#AddBtn").removeAttr("disabled");
+	if(elementTextBox.length==1)
+	{
+		$("#RemoveBtn").attr("disabled","disabled");
+	}
+}
+
+
+
+</script>
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+<script>
+function goBack() {
+    window.history.back();
+}
+</script>
+<style type="text/css">
+td { 
+    padding: 8px;
+}
+
+.additionalElm{
+display: none;
+}
+</style>
+</head>
+<body>
+<jsp:include page="leftSidebar.jsp"/>
+<div class="main" >
+<table style="width:100%;">
+<tr>
+<td colspan=7>
+	<h1><span  class="label label-default"><span id='elementName'></span><span id='elementAtomicNo'  class="badge"></span></span> </h1>
+</td>
+<td>
+<button style="float:right;" class="btn btn-secondary" onclick="goBack()">Go Back</button>
+	<div style="clear: both;"></div>
+</td>
+</tr>		
+<tr>
+<td>
+	<button id="AddBtn" type="button" class="btn btn-default btn-sm" onclick="AddElement()">
+	<span class="glyphicon glyphicon-plus"></span> Add Element
+	</button>
+</td>
+<td><input type='text' style='width:100px;' class='form-control additionalElm'/></td>
+<td><input type='text' style='width:100px;' class='form-control additionalElm'/></td>
+<td><input type='text' style='width:100px;' class='form-control additionalElm'/></td>
+<td><button onclick="RemoveElement()" id="RemoveBtn" disabled="disabled"  type="button" class="btn btn-default btn-sm">
+	<span  class="glyphicon glyphicon-minus"></span> Remove Element
+	</button></td>
+<td><label  class="control-label ">Number of elements:</label> <select style="width: 80px; " class="form-control" onchange="CreateElementTextBox(this.value);">
+			<option value="Any">All</option>
+			<option value="Binary">Binary</option>
+			<option value="Ternary">Ternary</option>
+		</select></td>
+<td></td>
+</tr>
+<tr>
+<td colspan="3"><label class="radio-inline"><input type="radio" checked="checked" name="optradio" value="showall">Show All</label>
+<label class="radio-inline"><input type="radio" name="optradio" value="spacegroup">Space Group</label>
+<label class="radio-inline"><input type="radio" name="optradio" value="crystalsystem">Crystal System</label></td>
+
+<td><label  class="control-label">Space Group:</label><input id="spaceGroupId" style="width:150px;" class="form-control"></td>
+
+<td>
+		<label  class="control-label ">Crystal System:</label> <select id="crystalSystem" style="width: 150px; " class="form-control" >
+			</select>
+</td>
+</tr>
+</table>
+	
+	
+
+	
+</div>
+</body>
+</html>
