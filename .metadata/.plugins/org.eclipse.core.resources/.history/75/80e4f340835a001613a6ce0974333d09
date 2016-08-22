@@ -1,0 +1,18 @@
+package fesdweb.model;
+
+public class DataViewerObj implements Comparable {
+
+	public DataViewerObj(String fileName,int fileCount)
+	{
+		FileCount  = fileCount;
+		FileName =  fileName;
+		
+	}
+	public int FileCount;
+	public String FileName;
+	@Override
+	public int compareTo(Object o) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+}

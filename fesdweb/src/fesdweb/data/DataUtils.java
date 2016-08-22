@@ -6,12 +6,27 @@ import java.sql.SQLException;
 
 public class DataUtils {
 	
-	public static final String DatatabaseUserName = "root";
-	public static final String DatatabasePassword = "root";//"inshALLAH%6";//
-	public static final String DatatabaseName = "fedb";//"fesdb";//
+	//public static final String DatatabaseUserName ="root";//towfiq: "root";
+	//public static final String DatatabasePassword ="root";//towfiq: "dhaka";//IMS:"inshALLAH%6";//"root";//dhaka
+	//public static final String DatatabaseName ="fedb";//IMS: "fesdb";//"fedb";//
 	
 	
-	public static final String FCifPath ="/home/adnanibnekhair/fesd/fcif/";// "E:\\fcif\\";//UNM////IMS://home//khair//fesd//fcif//fcif//";//
+	//public static final String FCifPath =//Towfiq:"C:\\Users\\atowf_000\\Desktop\\fcif\\";//IMS:"/home/khair/fesd/fcif/fcif/";//"E:\\fcif\\";//"/home/adnanibnekhair/fesd/fcif/"; //UNM////IMS:
+	
+	////local
+	/*public static final String DatatabaseUserName ="root";
+	public static final String DatatabasePassword ="root";
+	public static final String DatatabaseName ="fedb";//IMS: "fesdb";//"fedb";//
+	public static final String FCifPath ="E:\\fcif\\";//Towfiq:"C:\\Users\\atowf_000\\Desktop\\fcif\\";//IMS:"/home/khair/fesd/fcif/fcif/";//"E:\\fcif\\";//"/home/adnanibnekhair/fesd/fcif/"; //UNM////IMS:
+	*/
+	
+	//IMS
+	public static final String DatatabaseUserName ="root";
+	public static final String DatatabasePassword ="inshALLAH%6";
+	public static final String DatatabaseName ="fesdb";//IMS: "fesdb";//"fedb";//
+	public static final String FCifPath ="/home/khair/fesd/fcif/fcif/";//"E:\\fcif\\";//Towfiq:"C:\\Users\\atowf_000\\Desktop\\fcif\\";//IMS:"/home/khair/fesd/fcif/fcif/";//"E:\\fcif\\";//"/home/adnanibnekhair/fesd/fcif/"; //UNM////IMS:
+	
+	
 	
 	
 	public static Connection Conn = null;

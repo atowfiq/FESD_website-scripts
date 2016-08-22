@@ -1,0 +1,13 @@
+package fesdweb.model;
+
+public class DataViewerObj {
+
+	public DataViewerObj(String fileName,int fileCount)
+	{
+		FileCount  = fileCount;
+		FileName =  fileName;
+		
+	}
+	public int FileCount;
+	public String FileName;
+}
