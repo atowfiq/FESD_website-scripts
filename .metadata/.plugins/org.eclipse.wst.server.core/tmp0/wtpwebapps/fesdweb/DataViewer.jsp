@@ -144,6 +144,7 @@ function GoToSingleCompound(codId)
 	<td><a style="cursor:pointer;" onclick="GoToSingleCompound( {{html FileName}} )">  {{html FileName}} </a></td>
 	<td><a style="cursor:pointer;" onclick="GoToSingleCompound( {{html FileName}} )">  {{html FileCount}} </a></td>
 	<td><a style="cursor:pointer;" onclick="GoToSingleCompound( {{html FileName}} )">  {{html Error}} </a></td>
+	<td><a style="cursor:pointer;" onclick="GoToSingleCompound( {{html FileName}} )">  {{html OutLog}} </a></td>
 	
 
 </tr>
@@ -240,6 +241,9 @@ display: none;
 	<th>Files</th>
 	<th>Count</th>
 	<th>Error</th>
+	
+	<th>OutLog</th>
+	
  <!-- <th>RSPT</th> -->
 	      </tr>
 	    </thead>

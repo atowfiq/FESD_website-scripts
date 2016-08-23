@@ -102,6 +102,8 @@ function SearchCompound()
 	var selectedOption = $("input[type='radio']:checked").val();
 	var isShowAll=false;
 	var crystalSystemVal='',spaceGroupVal=''
+	var cifId = $("#CIFId").val().trim();
+
 	if(selectedOption!="showall")
 	{  
 		if(selectedOption =="spacegroup")
@@ -121,10 +123,10 @@ function SearchCompound()
 //	var directTo = "\Compound.jsp?AtomicNo="+atomicNo+"&AE="+additionalElements +"&IsShowAll="+isShowAll+"&SpaceGroup="+spaceGroupVal+"&CrystalSystem="+crystalSystemVal+"&ElementName="+elementName+"&ElementSymbol="+elementSymbol;
 //	location.href = directTo;
 
-	Search(atomicNo,additionalElements,isShowAll,spaceGroupVal,crystalSystemVal,restrictNumberOfElements);
+	Search(atomicNo,additionalElements,isShowAll,spaceGroupVal,crystalSystemVal,restrictNumberOfElements,cifId );
 }
 
-function Search(atomicNo,ae,isShowAll,spaceGroup,crystalSystem,restrictNumberOfElements)
+function Search(atomicNo,ae,isShowAll,spaceGroup,crystalSystem,restrictNumberOfElements,cifId)
 {
 	$("#TotalCount").show();
 	$("#TotalCount").text("Searching...");
@@ -137,7 +139,8 @@ function Search(atomicNo,ae,isShowAll,spaceGroup,crystalSystem,restrictNumberOfE
 		 IsShowAll:isShowAll,
 		 SpaceGroup :spaceGroup.length==0? 0:spaceGroup ,
 		 CrystalSystem : crystalSystem, 
-		 RestrictNumberOfElements:restrictNumberOfElements
+		 RestrictNumberOfElements:restrictNumberOfElements,
+		 cifId:cifId
 		 }, function(compoundList) {
 			 $("#TotalCount").hide();
 			 if(compoundList.length==0)
@@ -232,7 +235,7 @@ function GoToSingleCompound(codId)
 <script id="CompoundListTemplate"  type="text/x-jquery-tmpl">
 <tr>
 
-	
+	<td><a style="cursor:pointer;" onclick="GoToSingleCompound({{html CodID}})">{{html CodID}}</a></td>
 	<td><a style="cursor:pointer;" onclick="GoToSingleCompound({{html CodID}})"> {{html Formula }}</a></td>
 	<td>{{html SpaceGroup}}</td>
 	<td>{{html CrystalSystem}}</td>
@@ -279,10 +282,17 @@ display: none;
 <div class="main" >
 <table style="width:100%;">
 <tr>
-<td colspan=7>
+<td>
 	<h1><span  class="label label-default"><span id='elementName'></span><span id='elementAtomicNo'  class="badge"></span></span> </h1>
 </td>
-<td>
+<td style="text-align: right;">
+<label  class="control-label">ID:</label>
+</td>
+<td colspan="2"  >
+<input   id="CIFId" style="width:150px; " class="form-control">
+</td>
+
+<td colspan="3">
 <button style="float:right;" class="btn btn-secondary" onclick="goBack()">Go Back</button>
 	<div style="clear: both;"></div>
 </td>
@@ -330,12 +340,13 @@ display: none;
 	      <tr>
 	        
 	        
-	 
+	 <th>ID</th>
 	<th>Formula</th>
 	<th>Space Group</th>
 	<th>Crystal System</th>
 	  <th>Space Group Name</th>
 	  <th>CIF</th>
+	  
  <!-- <th>RSPT</th> -->
 	      </tr>
 	    </thead>

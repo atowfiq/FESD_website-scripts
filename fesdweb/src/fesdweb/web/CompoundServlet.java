@@ -34,6 +34,7 @@ public class CompoundServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String cifId =request.getParameter("cifId").toString();
 		int atomicNo = Integer.parseInt(request.getParameter("AtomicNo").toString());
 		String addtionalElements = request.getParameter("AE").toString();
 		Boolean isShowAll = Boolean.parseBoolean(request.getParameter("IsShowAll"));
@@ -41,7 +42,7 @@ public class CompoundServlet extends HttpServlet {
 	    String crystalSystem  = request.getParameter("CrystalSystem");
 	    String restrictNumberOfElements  = request.getParameter("RestrictNumberOfElements");
 		
-	    ArrayList<Compound> compoundsList = new CompoundDataService().SearchCompound(atomicNo,addtionalElements,isShowAll,spaceGroup,crystalSystem,restrictNumberOfElements);
+	    ArrayList<Compound> compoundsList = new CompoundDataService().SearchCompound(atomicNo,addtionalElements,isShowAll,spaceGroup,crystalSystem,restrictNumberOfElements,cifId );
 	    
 	    String json = new Gson().toJson(compoundsList);
 

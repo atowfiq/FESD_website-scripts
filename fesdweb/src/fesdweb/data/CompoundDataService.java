@@ -20,16 +20,17 @@ public class CompoundDataService {
 	
 
 	public ArrayList<Compound> SearchCompound(int atomicNo, String addtionalElements,
-			Boolean isShowAll, int spaceGroup, String crystalSystem,String restrictNumberOfElements) {
+			Boolean isShowAll, int spaceGroup, String crystalSystem,String restrictNumberOfElements, String cifId ) {
 		
 		ArrayList<Compound> compoundList = new ArrayList<Compound>();
 		Connection conn = DataUtils.CreateConnection();
-		String callSearchCompound ="{call SearchCompound(?,?,?,?)}";
+		String callSearchCompound ="{call SearchCompound(?,?,?,?,?)}";
 		try (CallableStatement stmt = conn.prepareCall(callSearchCompound)) {
 		    stmt.setInt(1, atomicNo);
 		    stmt.setBoolean(2, isShowAll);
 		    stmt.setInt(3, spaceGroup);
 		    stmt.setString(4, crystalSystem);
+		    stmt.setString(5, cifId);
 		    ResultSet rs = stmt.executeQuery();
 			
 		    

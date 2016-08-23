@@ -75,7 +75,7 @@ public class DataViewerServlet extends HttpServlet {
 	}
 
 	private String GetConvergeLog(String string) {
-		// TODO Auto-generated method stub
+		/*// TODO Auto-generated method stub
 File f = new File(filePath);
 		
 		if(!f.exists())
@@ -106,7 +106,8 @@ File f = new File(filePath);
 		 if(lines.size()==0)
 			 return "No Error";
 	
-		 return lines.get(lines.size()-1);
+		 return lines.get(lines.size()-1);*/
+		return "";
 	}
 
 	private String GetError(String filePath) {
