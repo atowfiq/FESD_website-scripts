@@ -13,19 +13,18 @@ public class DataUtils {
 	
 	//public static final String FCifPath =//Towfiq:"C:\\Users\\atowf_000\\Desktop\\fcif\\";//IMS:"/home/khair/fesd/fcif/fcif/";//"E:\\fcif\\";//"/home/adnanibnekhair/fesd/fcif/"; //UNM////IMS:
 	
-/*	////local
+	////local
 	public static final String DatatabaseUserName ="root";
 	public static final String DatatabasePassword ="root";
 	public static final String DatatabaseName ="fedb";//IMS: "fesdb";//"fedb";//
 	public static final String FCifPath ="E:\\fcif\\";//Towfiq:"C:\\Users\\atowf_000\\Desktop\\fcif\\";//IMS:"/home/khair/fesd/fcif/fcif/";//"E:\\fcif\\";//"/home/adnanibnekhair/fesd/fcif/"; //UNM////IMS:
-	*/
 	
 	//IMS
-	public static final String DatatabaseUserName ="root";
+/*	public static final String DatatabaseUserName ="root";
 	public static final String DatatabasePassword ="inshALLAH%6";
 	public static final String DatatabaseName ="fesdb";//IMS: "fesdb";//"fedb";//
 	public static final String FCifPath ="/home/khair/fesd/fcif/fcif/";//"E:\\fcif\\";//Towfiq:"C:\\Users\\atowf_000\\Desktop\\fcif\\";//IMS:"/home/khair/fesd/fcif/fcif/";//"E:\\fcif\\";//"/home/adnanibnekhair/fesd/fcif/"; //UNM////IMS:
-	
+	*/
 	
 	
 	

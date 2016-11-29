@@ -1,0 +1,17 @@
+127.0.0.1 - - [29/Nov/2016:13:32:31 -0700] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1 - - [29/Nov/2016:13:32:40 -0700] "GET /fesdweb/WEB-INF/classes/fesdweb/data/DataUtils.java HTTP/1.1" 404 949
+127.0.0.1 - - [29/Nov/2016:13:33:12 -0700] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1 - - [29/Nov/2016:13:34:03 -0700] "GET /fesdweb/index.jsp HTTP/1.1" 200 37787
+0:0:0:0:0:0:0:1 - - [29/Nov/2016:13:34:04 -0700] "GET /fesdweb/css/style.css HTTP/1.1" 200 4539
+0:0:0:0:0:0:0:1 - - [29/Nov/2016:13:34:04 -0700] "GET /fesdweb/logo/UNM.png HTTP/1.1" 200 4181
+0:0:0:0:0:0:0:1 - - [29/Nov/2016:13:34:04 -0700] "GET /fesdweb/logo/LANL.png HTTP/1.1" 200 15916
+0:0:0:0:0:0:0:1 - - [29/Nov/2016:13:34:04 -0700] "GET /fesdweb/logo/f-orbital_logo.png HTTP/1.1" 200 28013
+0:0:0:0:0:0:0:1 - - [29/Nov/2016:13:34:04 -0700] "GET /fesdweb/logo/logo_nordita.jpg HTTP/1.1" 200 83794
+0:0:0:0:0:0:0:1 - - [29/Nov/2016:13:34:04 -0700] "GET /fesdweb/logo/IMS-logo-color.jpg HTTP/1.1" 200 610231
+0:0:0:0:0:0:0:1 - - [29/Nov/2016:13:34:05 -0700] "GET /fesdweb/logo/upsala.png HTTP/1.1" 200 3068239
+0:0:0:0:0:0:0:1 - - [29/Nov/2016:13:34:05 -0700] "GET /favicon.ico HTTP/1.1" 404 973
+0:0:0:0:0:0:0:1 - - [29/Nov/2016:13:34:08 -0700] "GET /fesdweb/Element.jsp?atomicNo=92 HTTP/1.1" 200 19203
+0:0:0:0:0:0:0:1 - - [29/Nov/2016:13:34:08 -0700] "GET /fesdweb/js/jquery.tmpl.js HTTP/1.1" 200 19093
+0:0:0:0:0:0:0:1 - - [29/Nov/2016:13:34:10 -0700] "GET /fesdweb/ElementServlet?AtomicNo=92 HTTP/1.1" 200 69
+0:0:0:0:0:0:0:1 - - [29/Nov/2016:13:36:06 -0700] "GET /fesdweb/Element.jsp?atomicNo=92 HTTP/1.1" 200 19203
+0:0:0:0:0:0:0:1 - - [29/Nov/2016:13:36:07 -0700] "GET /fesdweb/ElementServlet?AtomicNo=92 HTTP/1.1" 200 69
