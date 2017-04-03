@@ -187,11 +187,11 @@ function RemoveElement()
 }
 
 
-function ViewCIF(codId)
+function ViewCIF(id)
 {
 	
 	$.get('SingleCompoundServlet', {
-		 CODId : codId 
+		 Id : id 
 		 }, function(compound) {
 			
 			var s = compound.Cif.replace(/(?:\r\n|\r|\n)/g, '<br />');
@@ -221,26 +221,39 @@ function ViewRSPT(codId)
 
 }
 
-function DownloadCIF(codId)
+function DownloadCIF(id,source)
 {
-	window.location = 'CIFServlet?CODId='+codId;
+	
+	window.location = "CIFServlet?downloadId="+id+"&source="+source;
 }
 
-function GoToSingleCompound(codId)
+function GoToSingleCompound(id)
 {
-	location.href =  "\SingleCompound.jsp?CODId="+codId;
+	location.href =  "\SingleCompound.jsp?Id="+id;
 }
 </script>
 
 <script id="CompoundListTemplate"  type="text/x-jquery-tmpl">
 <tr>
 
-	<td><a style="cursor:pointer;" onclick="GoToSingleCompound({{html CodID}})">{{html CodID}}</a></td>
-	<td><a style="cursor:pointer;" onclick="GoToSingleCompound({{html CodID}})"> {{html Formula }}</a></td>
+	<td><a style="cursor:pointer;" onclick="GoToSingleCompound({{html Id}})">{{html Id}}</a></td>
+	
+	<td><a style="cursor:pointer;" onclick="GoToSingleCompound({{html Id}})">
+{{html Source}} - {{if Source == "cod"}}{{html CodID}}
+{{/if}}
+{{if Source == "icsd"}}{{html ICSDID}}
+{{/if}}
+</a></td>
+	<td><a style="cursor:pointer;" onclick="GoToSingleCompound({{html Id}})"> {{html Formula }}</a></td>
 	<td>{{html SpaceGroup}}</td>
 	<td>{{html CrystalSystem}}</td>
 	  <td>{{html SpaceGroupName}}</td>
-<td><a style="cursor: pointer;" onclick="ViewCIF({{html CodID}});">View</a> | <a style="cursor: pointer;"  onclick="DownloadCIF({{html CodID}})">Download</a>
+    <td>{{html BSExists}}</td>
+
+<td><a style="cursor: pointer;" onclick="ViewCIF({{html Id}});">View</a> | <a style="cursor: pointer;"  onclick="DownloadCIF({{if Source == "cod"}}{{html CodID}}
+{{/if}}
+{{if Source == "icsd"}}{{html ICSDID}}
+{{/if}},'{{html Source}}')">Download</a>
 
 </td>
 </tr>
@@ -339,12 +352,14 @@ display: none;
 	    <thead>
 	      <tr>
 	        
-	        
 	 <th>ID</th>
+	        
+	 <th>Source-ID</th>
 	<th>Formula</th>
 	<th>Space Group</th>
 	<th>Crystal System</th>
 	  <th>Space Group Name</th>
+	  <th>BS</th>
 	  <th>CIF</th>
 	  
  <!-- <th>RSPT</th> -->

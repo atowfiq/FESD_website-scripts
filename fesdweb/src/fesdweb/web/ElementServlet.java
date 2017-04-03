@@ -38,7 +38,8 @@ public class ElementServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int atomicNo = Integer.parseInt(request.getParameter("AtomicNo").toString());
-		 
+		System.out.println(atomicNo);
+			 
 		
 		ElementPageData  elementData = new ElementPageData();
 		

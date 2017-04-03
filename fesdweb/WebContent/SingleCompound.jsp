@@ -21,7 +21,7 @@ $(document).ready(function(){
 	
 	
 	$.get('SingleCompoundServlet', {
-		 CODId : <%=request.getParameter("CODId")%> 
+		Id: <%=request.getParameter("Id")%> 
 		 }, function(compound) {
 			 Compound= compound;
 			LoadCif(compound.Cif); 
@@ -80,7 +80,12 @@ function ViewCIF()
 
 function DownloadCIF()
 {
-	window.location = 'CIFServlet?CODId='+Compound.CodID;
+	var downloadId;	
+	if(Compound.Source ='cod')
+		downloadId = Compound.CodID;
+	else
+		downloadId =  Compound.ICSDID;
+	window.location = 'CIFServlet?downloadId='+downloadId+"&source="+Compound.Source;
 }
 
 
@@ -89,14 +94,20 @@ function ViewCompoundProperties(propType)
 	
 	$('#CompoundFormulaName').text(Compound.Formula);	
 
-	var src= '';
+	var src = '../static/View/';
+	var srcId = '';
+	if (Compound.Source=='cod')
+		srcId  = Compound.CodID;
+	else 
+		srcId  = Compound.ICSDID;
 	if(propType=='dos'){
 		
-		src = 'DataImage/dos.png';
+		src = '/static/View/';
 	}
+	
 	else if(propType=='bs')
 	{
-		src = 'DataImage/bs.png';
+		src = src + 'bandstructure/'+Compound.Source+'/'+srcId+'.spaghetti_ps00.png';
 		
 	}
 	else if(propType=='fs')
@@ -109,7 +120,7 @@ function ViewCompoundProperties(propType)
 		src = 'DataImage/hf.png';
 		
 	}
-					
+	
 	$('#Viewer').modal();	
 //	$('#ViewerContent').html(propType);
      $('#imagepreview').attr('src', src);   
@@ -126,6 +137,14 @@ function ViewCompoundProperties(propType)
 
 <td>
 <table class="table table-striped">
+<tr>
+	<td><strong>Source</strong></td>	
+	<td>{{html Source}} - {{if Source == "cod"}}{{html CodID}}
+{{/if}}
+{{if Source == "icsd"}}{{html ICSDID}}
+{{/if}}
+</td>
+</tr>
 <tr>
 	<td><strong>Formula</strong></td>	
 	<td>{{html Formula}}</td>

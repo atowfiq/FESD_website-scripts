@@ -32,9 +32,10 @@ public class CIFServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 int codId = Integer.parseInt(request.getParameter("CODId").toString());
-	
-         String fileName = DataUtils.GetFCifFilePath(codId);
+		 int downloadId = Integer.parseInt(request.getParameter("downloadId").toString());
+		 String source = request.getParameter("source").toString();
+			
+         String fileName = DataUtils.GetFCifFilePath(downloadId,source);
          String fileType = "cif";
          // Find this file id in database to get file name, and file type
 
@@ -43,7 +44,7 @@ public class CIFServlet extends HttpServlet {
          response.setContentType(fileType);
 
          // Make sure to show the download dialog
-         response.setHeader("Content-disposition","attachment; filename="+codId+".cif");
+         response.setHeader("Content-disposition","attachment; filename="+downloadId+".cif");
 
          // Assume file name is retrieved from database
          // For example D:\\file\\test.pdf

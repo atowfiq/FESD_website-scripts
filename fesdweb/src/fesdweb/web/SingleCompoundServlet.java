@@ -45,11 +45,14 @@ public class SingleCompoundServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int codId = Integer.parseInt(request.getParameter("CODId").toString());
+		int codId = Integer.parseInt(request.getParameter("Id").toString());
 		
 		Compound c = new CompoundDataService().GetCompoud(codId);
-		String cif = 				new String(Files.readAllBytes(Paths.get(DataUtils.GetFCifFilePath(codId))), StandardCharsets.UTF_8);
-
+		String cif="";
+		int cifId = c.Source.equals("cod")? c.CodID:c.ICSDID;
+		cif =  new String(Files.readAllBytes(Paths.get(DataUtils.GetFCifFilePath(cifId,c.Source))), StandardCharsets.UTF_8);
+		
+			
 		c.Cif =cif;
 				
 				

@@ -2,6 +2,8 @@ package fesdweb.web;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -44,6 +46,13 @@ public class CompoundServlet extends HttpServlet {
 		
 	    ArrayList<Compound> compoundsList = new CompoundDataService().SearchCompound(atomicNo,addtionalElements,isShowAll,spaceGroup,crystalSystem,restrictNumberOfElements,cifId );
 	    
+	    Collections.sort(compoundsList, new Comparator<Compound>() {
+	    	
+	    	 @Override
+	         public int compare(Compound c1, Compound c2) {
+	             return Boolean.compare(c2.BSExists,c1.BSExists);
+	         }
+		});
 	    String json = new Gson().toJson(compoundsList);
 
 		response.setContentType("application/json");

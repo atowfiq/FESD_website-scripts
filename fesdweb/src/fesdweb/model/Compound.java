@@ -17,8 +17,11 @@ public class Compound {
 	public String CellLengthC;
 	public String CellVolume;
 	public String Cif;
-	
-	public Compound(int atomicNo, int codID, String formula, int spaceGroup, String crystalSystem, String spaceGroupName) {
+	public int Id;
+	public String Source;
+	public int ICSDID;
+	public boolean BSExists; 
+	public Compound(int atomicNo, int codID, String formula, int spaceGroup, String crystalSystem, String spaceGroupName, int id, String source, int icsdId) {
 
 		AtomicNo  = atomicNo;
 		CodID =  codID;
@@ -26,13 +29,15 @@ public class Compound {
 		SpaceGroup = spaceGroup;
 		CrystalSystem = crystalSystem;
 		SpaceGroupName = spaceGroupName;
-		
+		Id = id;
+		Source =source;
+		ICSDID = icsdId;
 	}
 	
 
 
 	public Compound(int atomicNo, int codID, String formula, int spaceGroup, String crystalSystem, String spaceGroupName, String _symmetry_space_group_name_Hall,
-			String _cell_angle_alpha, String _cell_formula_units_Z, String _cell_length_a, String _cell_length_b, String _cell_length_c, String _cell_volume) {
+			String _cell_angle_alpha, String _cell_formula_units_Z, String _cell_length_a, String _cell_length_b, String _cell_length_c, String _cell_volume,String source, int icsdId) {
 		// TODO Auto-generated constructor stub
 		AtomicNo  = atomicNo;
 		CodID =  codID;
@@ -48,6 +53,9 @@ public class Compound {
 		CellLengthB = _cell_length_b;
 		CellLengthC = _cell_length_c;
 		CellVolume = _cell_volume;
+		Source =source;
+		ICSDID = icsdId;
+	
 	}
 
 }
