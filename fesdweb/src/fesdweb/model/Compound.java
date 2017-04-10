@@ -20,7 +20,10 @@ public class Compound {
 	public int Id;
 	public String Source;
 	public int ICSDID;
-	public boolean BSExists; 
+	public boolean BSExists;
+	public boolean Dos1Exists;
+	public boolean Dos2Exists;
+	public boolean Dos3Exists;
 	public Compound(int atomicNo, int codID, String formula, int spaceGroup, String crystalSystem, String spaceGroupName, int id, String source, int icsdId) {
 
 		AtomicNo  = atomicNo;

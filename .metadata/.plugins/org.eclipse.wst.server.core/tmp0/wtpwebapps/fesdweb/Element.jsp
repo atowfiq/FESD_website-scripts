@@ -249,6 +249,7 @@ function GoToSingleCompound(id)
 	<td>{{html CrystalSystem}}</td>
 	  <td>{{html SpaceGroupName}}</td>
     <td>{{html BSExists}}</td>
+<td>{{html Dos1Exists}}</td>
 
 <td><a style="cursor: pointer;" onclick="ViewCIF({{html Id}});">View</a> | <a style="cursor: pointer;"  onclick="DownloadCIF({{if Source == "cod"}}{{html CodID}}
 {{/if}}
@@ -360,6 +361,7 @@ display: none;
 	<th>Crystal System</th>
 	  <th>Space Group Name</th>
 	  <th>BS</th>
+	  <th>Dos</th>
 	  <th>CIF</th>
 	  
  <!-- <th>RSPT</th> -->

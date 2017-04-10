@@ -48,7 +48,7 @@ public class DataUtils {
 	   return ViewPath+"cif/"+source+"/"+sourceId+".cif";
 		
 	}
-	public static boolean FileExists(String source, int id,String dataType)
+	public static boolean FileExists(String source, String id,String dataType)
 	{
 		String dt = "";
 		String ext = "";
@@ -58,10 +58,10 @@ public class DataUtils {
 			ext = ".spaghetti_ps00.png";
 		}
 			
-		else if(dataType.equals("bs"))
+		else if(dataType.equals("dos"))
 		{
 			dt = "dos";
-			
+			ext = "00.png";
 		}
 		Path p = Paths.get(ViewPath,dt,source,id+ext);
 		return Files.exists(p);

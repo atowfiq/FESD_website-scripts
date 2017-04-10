@@ -272,7 +272,7 @@ $(document).ready(function () {
 				<li ><a href="Paper.jsp">Paper<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-envelope"></span></a></li>
 				<li ><a href="About.jsp">About<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-exclamation-sign "></span></a></li>
 				<li ><a href="Help.jsp">Help<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-cloud "></span></a></li>
-				<li ><a href="DataViewer.jsp">Data Viewer<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-file"></span></a></li>
+				<li ><a href="generatedFile.txt">Data Viewer<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-file"></span></a></li>
 				
 			<!-- 	<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Settings <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-cog"></span></a>

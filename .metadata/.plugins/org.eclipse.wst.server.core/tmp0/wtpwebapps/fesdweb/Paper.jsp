@@ -37,8 +37,12 @@ margin-top:-40px;
 <ul>
 		<li>
 	
-	Predictive Modeling for Strongly Correlated f-electron Systems:
-A First-principles aided and Database driven Machine Learning Approach<a style="cursor:pointer;" href="resources/poster.pdf"> [Poster]</a> <a style="cursor:pointer;" href="resources/presentation.pptx"> [pptx]</a>
+	<b>A theoretical tool that predicts the nature of the 4f states of Ce compounds.</b> H. C. Herper, T. Ahmed, J. M. Wills, I. Di Marco,I. Locht, D. Iusan, A. V. Balatsky and O. Eriksson <a style="cursor:pointer;" href="resources/CEC.pdf"> [Paper]</a> 
+	
+</li>
+<li>
+<b>Supervised Classification for Crystallographic Information Files.</b> A. Khair, T. Ahmed <a style="cursor:pointer;" href="resources/SCCIF.pdf"> [Paper]</a>
+
 </li>
 </ul>
 

@@ -41,7 +41,10 @@ public class CompoundDataService {
 							continue;
 						Compound c = new Compound(atomicNo, rs.getInt("_cod_database_code"),formula,  rs.getInt("_space_group_IT_number"), rs.getString("_symmetry_cell_setting"),
 								rs.getString("_symmetry_space_group_name_HM"),rs.getInt("id"),rs.getString("source"),rs.getInt("_database_code_ICSD"));
-						c.BSExists= DataUtils.FileExists(c.Source, c.Source.equals("cod")?c.CodID:c.ICSDID, "bs");
+						c.BSExists= DataUtils.FileExists(c.Source, c.Source.equals("cod")?c.CodID+"":c.ICSDID+"", "bs");
+						c.Dos1Exists = DataUtils.FileExists(c.Source, c.Source.equals("cod")?c.CodID+"":c.ICSDID+"1", "dos");
+						c.Dos2Exists = DataUtils.FileExists(c.Source, c.Source.equals("cod")?c.CodID+"":c.ICSDID+"2", "dos");
+						c.Dos3Exists = DataUtils.FileExists(c.Source, c.Source.equals("cod")?c.CodID+"":c.ICSDID+"3", "dos");
 						compoundList.add(c); 
 				}
 				rs.close();
@@ -121,6 +124,11 @@ public class CompoundDataService {
 					 c = new Compound(rs.getInt("atomicNo"), rs.getInt("_cod_database_code"),rs.getString("_chemical_formula_sum"),  rs.getInt("_space_group_IT_number"), rs.getString("_symmetry_cell_setting"), 
 							 rs.getString("_symmetry_space_group_name_HM"),rs.getString("_symmetry_space_group_name_Hall"),rs.getString("_cell_angle_alpha"),rs.getString("_cell_formula_units_Z"),rs.getString("_cell_length_a"),rs.getString("_cell_length_b")
 							 ,rs.getString("_cell_length_c"),rs.getString("_cell_volume"),rs.getString("source"),rs.getInt("_database_code_ICSD"));
+					c.BSExists= DataUtils.FileExists(c.Source, c.Source.equals("cod")?c.CodID+"":c.ICSDID+"", "bs");
+					c.Dos1Exists = DataUtils.FileExists(c.Source, c.Source.equals("cod")?c.CodID+"":c.ICSDID+"1", "dos");
+					c.Dos2Exists = DataUtils.FileExists(c.Source, c.Source.equals("cod")?c.CodID+"":c.ICSDID+"2", "dos");
+					c.Dos3Exists = DataUtils.FileExists(c.Source, c.Source.equals("cod")?c.CodID+"":c.ICSDID+"3", "dos");
+					
 					}
 				rs.close();
 				stmt.close();

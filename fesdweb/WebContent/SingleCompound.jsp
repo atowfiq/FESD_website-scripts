@@ -89,9 +89,12 @@ function DownloadCIF()
 }
 
 
+
+
+
+
 function ViewCompoundProperties(propType)
 {
-	
 	$('#CompoundFormulaName').text(Compound.Formula);	
 
 	var src = '../static/View/';
@@ -100,9 +103,16 @@ function ViewCompoundProperties(propType)
 		srcId  = Compound.CodID;
 	else 
 		srcId  = Compound.ICSDID;
-	if(propType=='dos'){
-		
-		src = '/static/View/';
+	if(propType=='dos1'){
+		src = src + 'dos/'+Compound.Source+'/'+srcId+'100.png';
+			
+	}
+	if(propType=='dos2'){		
+		src = src + 'dos/'+Compound.Source+'/'+srcId+'200.png';
+	}
+	if(propType=='dos3'){
+		src = src + 'dos/'+Compound.Source+'/'+srcId+'300.png';
+			
 	}
 	
 	else if(propType=='bs')
@@ -126,7 +136,6 @@ function ViewCompoundProperties(propType)
      $('#imagepreview').attr('src', src);   
 	
 }
-
 </script>
 
 
@@ -192,6 +201,35 @@ function ViewCompoundProperties(propType)
 		<td>{{html CellVolume}}</td>
 
 </tr>
+
+{{if BSExists}}
+<tr>
+<td><strong>BandStructure</strong></td>
+<td><button style="width:180px;" class="btn btn-secondary" onclick="ViewCompoundProperties('bs')">Brand Structure</button></td>
+</tr>
+{{/if}}	 
+
+{{if Dos1Exists}}
+<tr>
+<td><strong>Dos 1</strong></td>
+<td><button style="width:180px;" class="btn btn-secondary" onclick="ViewCompoundProperties('dos1')">Dos 1</button></td>
+</tr>
+{{/if}}	 
+
+{{if Dos2Exists}}
+<tr>
+<td><strong>Dos 2</strong></td>
+<td><button style="width:180px;" class="btn btn-secondary" onclick="ViewCompoundProperties('dos2')">Dos 2</button></td>
+</tr>
+{{/if}}
+{{if Dos3Exists}}
+<tr>
+<td><strong>Dos 3</strong></td>
+<td><button style="width:180px;" class="btn btn-secondary" onclick="ViewCompoundProperties('dos3')">Dos 3</button></td>
+</tr>
+{{/if}}	 
+
+
 <tr>
 <td><strong>CIF</strong></td>
 <td>
@@ -210,7 +248,7 @@ function ViewCompoundProperties(propType)
 <tr>
 <td colspan=2>
  
-Automated DFT calculations on <span style="color: red;">15000</span> f-electron compounds
+Automated DFT calculations on <span style="color: red;">80000</span> f-electron compounds
 </td>
 
 </tr>
@@ -233,7 +271,7 @@ margin-top:-40px;
 
 
 .modal .modal-body {
-    max-height: 420px;
+    max-height: 800px;
     overflow-y: auto;
 }
 
@@ -259,16 +297,6 @@ function goBack() {
 	<div style="clear:both;"></div>
 	
 	
-		 <div><strong>Available Properties:</strong></div>
-	 <table style=" border-collapse: separate; border-spacing: 10px;">
-	 <tr><td><button style="width:180px;" class="btn btn-secondary" onclick="ViewCompoundProperties('dos')">DOS</button></td>
-	 <td><button style="width:180px;" class="btn btn-secondary" onclick="ViewCompoundProperties('bs')">Brand Structure</button></td>
-	 <td><button style="width:180px;" class="btn btn-secondary" onclick="ViewCompoundProperties('fs')">Fermi Surface</button></td>
-	 <td><button style="width:180px;" class="btn btn-secondary" onclick="ViewCompoundProperties('hf')">Hybridization Function</button></td>
-	 
-	 
-	 </tr>
-	 </table>
 	
 		    <table style="padding-top: 10px;" class="table" >
 	    <tbody >
@@ -321,7 +349,7 @@ function goBack() {
         </div>
         <div class="modal-body">
        
-<div id="ViewerContent" > <img src="" id="imagepreview" style="width: 600px; height: 380px;" ></div>
+<div id="ViewerContent" > <img src="" id="imagepreview" style="padding: 5px; width: 800px; height: 600px;" ></div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
