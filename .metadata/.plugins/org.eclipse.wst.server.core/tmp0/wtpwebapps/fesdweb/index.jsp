@@ -21,7 +21,6 @@ $(document).ready(function () {
 });
 </script>
 
-
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
@@ -32,17 +31,34 @@ $(document).ready(function () {
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="css/style.css">
 
+<style type="text/css">
+.custom-bullet li {
+    display: block;
+}
 
+.custom-bullet li:before
+{
+    /*Using a Bootstrap glyphicon as the bullet point*/
+    content: "\e080";
+    font-family: 'Glyphicons Halflings';
+    font-size: 9px;
+    float: left;
+    margin-top: 4px;
+    margin-left: -17px;
+    color: #CCCCCC;
+}
+
+</style>
 
 </head>
 <body>
+<jsp:include page="topBar.jsp"/>
 <jsp:include page="leftSidebar.jsp"/>
 <div class="main" >
-<h4 style="text-align: justify; text-justify: inter-word; width: 800px;">f-ESD is an electronic structure database for 4f and 5f compounds.It provides calculated data for XXX known systems such as density of states, band structure, and Fermi surfaces calculated on the footing of DFT. Our main goal is to provide information for many compounds on the same level of accuracy to allow a systematic search for physical trends and high throughput screening.</h4>
-<div style="padding-top:100px;">
-Choose one element to get information on binary and ternary compounds containing this element.
 
-</div>
+<h2 style="padding-top:20px; color: #b52e17; text-align: center;">
+<b>Welcome to f-electron database (FESD) !</b>
+</h2>
 
 <div class="periodic" style="padding-left:20px;padding-top:10px;">
   <!-- 
@@ -940,6 +956,37 @@ Choose one element to get information on binary and ternary compounds containing
     </div>
   </div>
   <div style="clear: both;"></div>
+
+ <ul class="list-group" style="text-align: justify; text-justify: inter-word;  font-size: medium; padding-top: 50px; width:82%;">
+<li class="list-group-item">
+
+<span class="textPara"> Database Description</span>: FESD is an open access database dedicated to <i>f</i>-electron orbital systems which includes Lanthanides and Actinides as constituent elements. <br>
+<br>
+
+This database offers:
+<ul class="custom-bullet " >
+
+<li > 
+<b>28000</b> crystal structure files with approximately <b>9000</b> independent <i>f</i>-electron compounds;</li> 
+<li >
+Search capability based on their symmetry information and chemical constituents.</li>  	
+<li >
+<b>Band structures</b> and <b>DOS (Density of States)</b> of approximately <b>3200</b> binary <i>f</i>-electron compounds.</li>
+<li >
+Datamining tools to search for electronic properties in the desired range in feature space, and determine the mutual statistical correlation between such properties.</li> 
+<li >
+Machine learning tools for classification <b>(supervised)</b> and clustering <b>(unsupervised)</b> of data.</li>
+</ul>
+
+<br>
+<br>
+<br>
+ <span class="textPara">Reference</span>:<b> Open access <i>f</i>-electron database (FESD): a machine learning approach for the crystal and electronic structures of strongly correlated <i>f</i>-electron materials.</b>  A Khair, T. Ahmed, A. Mueen, A. Balatsky (under preparation)
+ <a style="cursor:pointer;" href="resources/fdb.pdf" target="_blank"> [Paper]</a>
+</li>
+</ul>
+	
+
 </div>
 
 
@@ -947,7 +994,6 @@ Choose one element to get information on binary and ternary compounds containing
 
 </div>
 
-</div>
-
+<jsp:include page="rightSidebar.jsp"/>
 </body>
 </html>

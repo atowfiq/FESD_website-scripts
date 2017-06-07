@@ -12,18 +12,71 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-<script src="js/jquery.tmpl.js" type="text/javascript"></script>   
+<script src="js/jquery.tmpl.js" type="text/javascript"></script> 
+ <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+     
+      function drawChart(band) {
+    	  
+    	  var X = band.X.split(",");
+    	  
+		  var strs = [];
+		  for(var j=0;j< band.BandEnergy.length;j++)
+          {			  	
+        		  var e = band.BandEnergy[j].Energy.split(",");
+        		  strs.push(e);        		          		  
+          }
+		  var r=[];
+		  var d= [];
+		  for(var i=0;i< X.length;i++)
+		  {
+			  d.push(parseFloat(X[i]));
+			  for(var j=0;j<band.BandEnergy.length;j++)
+			 {
+				  d.push(parseFloat(strs[j][i]));
+			 }
+			  r.push(d.slice());	
+			  d=[];
+		  }
+		
+		  var data = new google.visualization.DataTable();// google.visualization.arrayToDataTable(r);
+    	  for(var i=0;i<=band.BandEnergy.length;i++)
+		  {
+			  data.addColumn("number",i.toString());
+		  }
+		  
+		  data.addRows(r);
+          var options = {
+        		 explorer: {
+        			 actions: ['dragToZoom', 'rightClickToReset'],
+        	            axis: 'horizontal',
+        	            keepInBounds: true,
+        	            maxZoomIn: 4.0},	
+          title: 'Bandstructure',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+         };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        chart.draw(data, options);
+      }
+     
+  	
+    </script>
 <script type="text/javascript">
 
-var Compound;
 $(document).ready(function(){
 		
 	
 	
 	$.get('SingleCompoundServlet', {
 		Id: <%=request.getParameter("Id")%> 
-		 }, function(compound) {
+		 }, function(compound) { 
+			 compound.BSExists=true;
 			 Compound= compound;
+			
 			LoadCif(compound.Cif); 
 		//	$("#cifViz").html(new String(compound.Cif));
 				
@@ -95,7 +148,6 @@ function DownloadCIF()
 
 function ViewCompoundProperties(propType)
 {
-	$('#imagepreview').removeClass("rotate90");
 	$('#CompoundFormulaName').text(Compound.Formula);	
 
 	var src = '../static/View/';
@@ -105,23 +157,20 @@ function ViewCompoundProperties(propType)
 	else 
 		srcId  = Compound.ICSDID;
 	if(propType=='dos1'){
-		$('#imagepreview').addClass("rotate90");
 		src = src + 'dos/'+Compound.Source+'/'+srcId+'100.png';
 			
 	}
 	if(propType=='dos2'){		
-		$('#imagepreview').addClass("rotate90");
 		src = src + 'dos/'+Compound.Source+'/'+srcId+'200.png';
 	}
 	if(propType=='dos3'){
-		$('#imagepreview').addClass("rotate90");
 		src = src + 'dos/'+Compound.Source+'/'+srcId+'300.png';
 			
 	}
 	
 	else if(propType=='bs')
 	{
-		src = src + 'bandstructure/'+Compound.Source+'/'+srcId+'.spaghetti_ps00.png';
+	//	src = src + 'bandstructure/'+Compound.Source+'/'+srcId+'.spaghetti_ps00.png';
 		
 	}
 	else if(propType=='fs')
@@ -138,8 +187,12 @@ function ViewCompoundProperties(propType)
 	$('#Viewer').modal();	
 //	$('#ViewerContent').html(propType);
      $('#imagepreview').attr('src', src);   
-	
+     $('#Viewer').on('shown.bs.modal', function () {
+    	 drawChart(Compound.Band);
+    	});
 }
+
+
 </script>
 
 
@@ -209,7 +262,7 @@ function ViewCompoundProperties(propType)
 {{if BSExists}}
 <tr>
 <td><strong>BandStructure</strong></td>
-<td><button style="width:180px;" class="btn btn-secondary" onclick="ViewCompoundProperties('bs')">Brand Structure</button></td>
+<td><button style="width:180px;" class="btn btn-secondary" onclick="ViewCompoundProperties('bs')">BandStructure</button></td>
 </tr>
 {{/if}}	 
 
@@ -237,7 +290,7 @@ function ViewCompoundProperties(propType)
 <tr>
 <td><strong>CIF</strong></td>
 <td>
-<a style="cursor: pointer;" onclick="ViewCIF();">View</a> | <a style= "cursor: pointer;"  onclick="DownloadCIF()">Download</a>
+<a style="cursor: pointer;" onclick="ViewCIF();">View</a> 
 </td>
 </tr>
 <tr>
@@ -278,13 +331,25 @@ margin-top:-40px;
     max-height: 800px;
     overflow-y: auto;
 }
-.rotate90 {
-    -webkit-transform: rotate(90deg);
-    -moz-transform: rotate(90deg);
-    -o-transform: rotate(90deg);
-    -ms-transform: rotate(90deg);
-    transform: rotate(90deg);
+.modal {
+  text-align: center;
 }
+
+@media screen and (min-width: 768px) {
+  .modal:before {
+    content: " ";
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+  }
+}
+
+.modal-dialog {
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+}
+
 </style>
 <script>
 function goBack() {
@@ -293,8 +358,8 @@ function goBack() {
 </script>
 </head>
 <body>
+<jsp:include page="topBar.jsp"/>
 <jsp:include page="leftSidebar.jsp"/>
-
 <div class="main">
 
 
@@ -346,7 +411,7 @@ function goBack() {
     </div>
   </div>
   	
-	<div  id="Viewer"  class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+	<div  id="Viewer"  class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" style="width:100%">
     <div class="modal-dialog modal-lg">
      
       <!-- Modal content-->
@@ -356,10 +421,11 @@ function goBack() {
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title" id="CompoundFormulaName"></h4>
+          
         </div>
         <div class="modal-body">
-       
-<div id="ViewerContent" > <img src="" id="imagepreview" style="width: 800px; height: 600px;" ></div>
+   <div id="curve_chart" style="width: 900px; height: 500px"></div>
+<div id="ViewerContent"  style="display: none;"> <img src="" id="imagepreview" style="padding: 5px; width: 800px; height: 600px;" ></div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -370,6 +436,7 @@ function goBack() {
   </div>
   
 </div>
+
 
 </body>
 </html>

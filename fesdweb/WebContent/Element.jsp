@@ -229,7 +229,11 @@ function DownloadCIF(id,source)
 
 function GoToSingleCompound(id)
 {
-	location.href =  "\SingleCompound.jsp?Id="+id;
+	window.open(
+			"\SingleCompound.jsp?Id="+id,
+			  '_blank' // <- This is what makes it open in a new window.
+			);
+	//location.href =  "\SingleCompound.jsp?Id="+id;
 }
 </script>
 
@@ -292,8 +296,10 @@ display: none;
 </style>
 </head>
 <body>
+<jsp:include page="topBar.jsp"/>
 <jsp:include page="leftSidebar.jsp"/>
 <div class="main" >
+
 <table style="width:100%;">
 <tr>
 <td>
@@ -402,5 +408,6 @@ display: none;
 
 	
 </div>
+
 </body>
 </html>

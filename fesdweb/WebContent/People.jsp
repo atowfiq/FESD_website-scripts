@@ -34,6 +34,7 @@ margin-top:-40px;
 
 </head>
 <body>
+<jsp:include page="topBar.jsp"/>
 <jsp:include page="leftSidebar.jsp"/>
 
 <div class="main">
@@ -91,8 +92,8 @@ margin-top:-40px;
 
 		<strong>Assistant Professor</strong>
 		</li><li>		Abdullah Mueen</li>
-		<li> DEPARTMENT OF COMPUTER SCIENCE</li>
-		<li>UNIVERSITY OF NEW MEXICO</li>
+		<li>Department of Computer Science</li>
+		<li>University of New Mexico</li>
 		<li><a href="mailto:mueen@cs.unm.edu ">
                           Email                        
    		 	</a>
@@ -103,7 +104,7 @@ margin-top:-40px;
 			 <ul>
 			<li>
 				<a href="">
-					<img style="width:150px;height: 160px;"  src="image/ni.gif">
+					<img style="width:150px;height: 160px;"  src="image/jw.png">
 				</a>
 			</li>
 			<li>
@@ -164,6 +165,24 @@ margin-top:-40px;
 			 <ul>
 			<li>
 				<a href="">
+					<img style="width:150px;height: 160px;"  src="image/jz.jpg">
+				</a>
+			</li>
+			<li>
+			<strong>Staff Scientist, Theoretical Division</strong>
+			</li><li>Jianxin Zhu</li>
+			<li>Los Alamos National Laboratory</li>
+			<li><a href="mailto:jxzhu@lanl.gov">
+	                          Email                        
+	   		 	</a>
+	   		 </li>
+			 </ul>
+		</td>	
+		
+		<td> 
+			 <ul>
+			<li>
+				<a href="">
 					<img style="width:150px;height: 160px;"  src="image/ak.jpg">
 				</a>
 			</li>
@@ -178,9 +197,10 @@ margin-top:-40px;
 	   		 </li>
 			 </ul>
 		</td>	
-		<td></td>	 
 		</tr> 
 </table>
 </div>
+
+
 </body>
 </html>

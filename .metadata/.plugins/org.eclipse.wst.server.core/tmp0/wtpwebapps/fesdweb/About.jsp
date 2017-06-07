@@ -19,9 +19,7 @@
 <link rel="stylesheet" href="css/core-layout.css">
 
 <style type="text/css">
-.main{
-margin-top:-40px;
-}
+
 
 #contacts ul {
     margin: 0 0 10px 0;
@@ -33,13 +31,27 @@ margin-top:-40px;
 
 </head>
 <body>
+<jsp:include page="topBar.jsp"/>
 <jsp:include page="leftSidebar.jsp"/>
-
 <div class="main">
+
+ <ul class="list-group" style="text-align: justify; text-justify: inter-word;  font-size: medium; width:90%; padding-top: 40px; ">
+<li class="list-group-item">
+
 <div class="page-header">
 	<h1><span>About</span> </h1>
 </div>
-Under Construction
+
+
+<span class="textPara">Background</span>: The remarkable <span style="color: blue;"><b>electronic</b></span></span>,  <span style="color: red;"><b>thermal</b></span>, <span style="color: green;"><b>magnetic</b></span>, <span style="color: brown;"><b>topological</b></span>, and <span style="color: violet;"><b>heavy-fermionic</b></span> properties in <i>f</i>-electron systems have inspired the material science community to invest experimental and theoretical resources at an unprecedented scale in the recent years. However, the complex electronic interactions due to the localized <i>f-</i>orbital electrons make it very challenging to develop a reliable predictive model. Despite decades-long effort to understand the underlying physics of <i>f</i>-electron systems, the experimentalists are still left for exploring such materials with serendipity.         
+<br>
+<br>
+<br>
+Motivated by the growing need for the predictive modeling of correlated f-electron compounds for numerous energy, technology, and security applications, a data-driven approach is adopted here to search for the statistical correlations between various physical and electronic features.  Such features can be extracted from experimental data as well as DFT simulated electronic structure data. Then, using various learning algorithms, the machine can be trained to achieve a predictive capability for strongly correlated f-electron materials. 
+</li>
+</ul>
+
 </div>
+<jsp:include page="rightSidebar.jsp"/>
 </body>
 </html>

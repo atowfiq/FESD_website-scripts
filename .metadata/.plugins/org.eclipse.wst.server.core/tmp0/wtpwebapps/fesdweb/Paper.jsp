@@ -17,36 +17,42 @@
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 <style type="text/css">
-.main{
-margin-top:-40px;
-}
+
 </style>
 
 
 </head>
 <body>
+<jsp:include page="topBar.jsp"/>
 <jsp:include page="leftSidebar.jsp"/>
 
-<div class="main">
-<div class="page-header">
-	<h1><span >Paper</span> </h1>
 
+<div class="main">
+
+ <ul class="list-group" style="text-align: justify; text-justify: inter-word;  font-size: medium; width:90%; padding-top: 40px;">
+<li class="list-group-item">
+
+<div class="page-header">
+	<h1><span>Paper</span> </h1>
 </div>
 
-
 <ul>
-		<li>
-	
-	<b>A theoretical tool that predicts the nature of the 4f states of Ce compounds.</b> H. C. Herper, T. Ahmed, J. M. Wills, I. Di Marco,I. Locht, D. Iusan, A. V. Balatsky and O. Eriksson <a style="cursor:pointer;" href="resources/CEC.pdf"> [Paper]</a> 
+
+<li>
+<b>Open access f-electron database (FESD): a machine learning approach for the crystal and electronic structures of strongly correlated f-electron materials.</b>  A Khair, T. Ahmed, A. Mueen, A. Balatsky (under preparation)
+ <a style="cursor:pointer;" href="resources/fdb.pdf" target="_blank"> [Paper]</a></li> 
+		<li>	
+	<b>A theoretical tool that predicts the nature of the 4f states of Ce compounds.</b> H. C. Herper, T. Ahmed, J. M. Wills, I. Di Marco,I. Locht, D. Iusan, A. V. Balatsky and O. Eriksson <a style="cursor:pointer;" href="resources/CEC.pdf" target="_blank"> [Paper]</a> 
 	
 </li>
-<li>
-<b>Supervised Classification for Crystallographic Information Files.</b> A. Khair, T. Ahmed <a style="cursor:pointer;" href="resources/SCCIF.pdf"> [Paper]</a>
+
+</ul>
 
 </li>
 </ul>
 
 </div>
 
+<jsp:include page="rightSidebar.jsp"/>
 </body>
 </html>

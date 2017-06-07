@@ -1,0 +1,55 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+ <style >
+   #right_panel {
+    float: right;
+    width: 235px;
+    padding: 15px;
+    padding-left: 0px;
+    border-left: 1px solid gray;
+    /* background-color: #E3F2FF; */
+}
+ </style>
+ <div style="clear: both;"></div>
+<div id="right_panel" role="complementary"> 
+<nav class="bs-docs-sidebar hidden-print hidden-sm hidden-xs affix"> 
+<ul class="nav bs-docs-sidenav"> <li class=""> <a href="#overview">Collaborations:</a> 
+<ul class="nav"> 
+
+
+<li class="">
+ <span>
+
+	<a href="http://www.lanl.gov/">
+	<img style="height:60px;width: 160px;" src="${pageContext.request.contextPath}/logo/LANL.png" >
+	</a>
+	</span> 
+</li> 
+<li class="">
+ <span>
+
+	<a href="http://www.lanl.gov/">
+	<img style="height:60px;width: 160px;" src="${pageContext.request.contextPath}/logo/LANL.png" >
+	</a>
+	</span> 
+</li> 
+
+<li class="">
+ <span>
+
+	<a href="http://www.lanl.gov/">
+	<img style="height:60px;width: 160px;" src="${pageContext.request.contextPath}/logo/LANL.png" >
+	</a>
+	</span> 
+</li> 
+
+<li class="">
+ <span>
+
+	<a href="http://www.lanl.gov/">
+	<img style="height:60px;width: 160px;" src="${pageContext.request.contextPath}/logo/LANL.png" >
+	</a>
+	</span> 
+</li>  </ul> </li> 
+
+</ul>  </nav> </div>

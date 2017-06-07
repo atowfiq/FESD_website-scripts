@@ -1,0 +1,72 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+ <style >
+   #right_panel {
+    float: right;
+    width: 180px;
+    padding: 15px;
+    padding-left: 0px;
+    margin-top:100px;
+    /* background-color: #E3F2FF; */
+}
+.linkSpace{
+	padding:15px;
+}
+.imgcls{
+
+height:60px;
+width: 120px;
+}
+ </style>
+ <div style="clear: both;"></div>
+<div id="right_panel" role="complementary"> 
+<nav class="bs-docs-sidebar hidden-print hidden-sm hidden-xs affix"> 
+<ul class="nav bs-docs-sidenav"> 
+<ul class="nav"> 
+
+
+<li class="linkSpace">
+ <span>
+
+	<a href="http://www.lanl.gov/" target="_blank">
+	<img class="imgcls" src="${pageContext.request.contextPath}/logo/LANL.png" >
+	</a>
+	</span> 
+</li> 
+<li class="linkSpace">
+ <span>
+
+	<a href="http://www.lanl.gov/projects/national-security-education-center/institute-for-materials-science/" target="_blank">
+	<img class="imgcls" src="${pageContext.request.contextPath}/logo/IMS-logo-color.jpg">
+	</a>
+	</span> 
+</li> 
+
+<li class="linkSpace">
+ <span>
+
+	<a href="https://www.nordita.org/" target="_blank">
+	<img class="imgcls" src="${pageContext.request.contextPath}/logo/norditax.png">
+	</a>
+	</span> 
+</li> 
+
+<li class="linkSpace">
+ <span>
+
+	<a href="http://www.unm.edu/" target="_blank">
+	<img class="imgcls" src="${pageContext.request.contextPath}/logo/UNM.png" >
+	</a>
+	</span> 
+</li> 
+
+<li class="linkSpace">
+ <span>
+
+	<a href="https://www.uu.se/en/" target="_blank">
+	<img class="imgcls" src="${pageContext.request.contextPath}/logo/upsala.png" >
+	</a>
+	</span> 
+</li> 
+ </ul> 
+</ul>  </nav> </div>

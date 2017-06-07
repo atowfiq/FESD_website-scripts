@@ -182,6 +182,7 @@ display: none;
 </style>
 </head>
 <body>
+<jsp:include page="topBar.jsp"/>
 <jsp:include page="leftSidebar.jsp"/>
 <div class="main" >
 <!--  <table style="width:100%;">

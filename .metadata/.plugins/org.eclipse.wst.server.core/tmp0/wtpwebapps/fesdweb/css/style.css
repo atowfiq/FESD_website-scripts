@@ -4,6 +4,8 @@ body {
   -ms-transform: translateZ(0);
   transform: translateZ(0);
 }
+
+
 .periodic {
   position: relative;
   height: 200px;
@@ -192,3 +194,4 @@ body {
     font-size: 30px;
   }
 }
+

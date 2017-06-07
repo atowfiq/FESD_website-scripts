@@ -113,6 +113,7 @@ td,th{
 </style>
 </head>
 <body>
+<jsp:include page="topBar.jsp"/>
 <jsp:include page="leftSidebar.jsp"/>
 
 <div class="main">

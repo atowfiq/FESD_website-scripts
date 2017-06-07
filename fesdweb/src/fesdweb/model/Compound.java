@@ -24,6 +24,7 @@ public class Compound {
 	public boolean Dos1Exists;
 	public boolean Dos2Exists;
 	public boolean Dos3Exists;
+	public Bandstructure Band;
 	public Compound(int atomicNo, int codID, String formula, int spaceGroup, String crystalSystem, String spaceGroupName, int id, String source, int icsdId) {
 
 		AtomicNo  = atomicNo;

@@ -7,8 +7,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import fesdweb.model.Bandstructure;
+import fesdweb.model.BandstructureEnergy;
 import fesdweb.model.Compound;
 import fesdweb.model.Element;
+
 
 
 public class CompoundDataService {
@@ -108,7 +111,7 @@ public class CompoundDataService {
 
 
 
-	public Compound GetCompoud(int Id) {
+	public Compound GetCompoud(int id) {
 		Compound c = null;
 		Statement stmt = null;
 		try {
@@ -117,7 +120,7 @@ public class CompoundDataService {
 			                   
 			ResultSet rs = stmt.executeQuery("SELECT atomicno,_chemical_formula_structural,_chemical_formula_sum,_space_group_IT_number,"
 					+"_symmetry_cell_setting,_symmetry_space_group_name_Hall,_symmetry_space_group_name_HM,_cell_angle_alpha,"
-					+"_cell_formula_units_Z,_cell_length_a,_cell_length_b,_cell_length_c,_cell_volume,_cod_database_code,source,_database_code_ICSD FROM compound Where id="+Id);
+					+"_cell_formula_units_Z,_cell_length_a,_cell_length_b,_cell_length_c,_cell_volume,_cod_database_code,source,_database_code_ICSD FROM compound Where id="+id);
 			
 			try {
 				while (rs.next()) {
@@ -128,7 +131,7 @@ public class CompoundDataService {
 					c.Dos1Exists = DataUtils.FileExists(c.Source, c.Source.equals("cod")?c.CodID+"":c.ICSDID+"1", "dos");
 					c.Dos2Exists = DataUtils.FileExists(c.Source, c.Source.equals("cod")?c.CodID+"":c.ICSDID+"2", "dos");
 					c.Dos3Exists = DataUtils.FileExists(c.Source, c.Source.equals("cod")?c.CodID+"":c.ICSDID+"3", "dos");
-					
+					c.Band = GetBandstructure(id);
 					}
 				rs.close();
 				stmt.close();
@@ -155,5 +158,96 @@ public class CompoundDataService {
 		
 
 		return c;
+	}
+
+
+
+	private Bandstructure GetBandstructure(int id) {
+		Bandstructure bs = null;
+		Statement stmt = null;
+		try {
+			Connection conn = DataUtils.CreateConnection();
+			stmt = conn.createStatement();
+			                   
+			ResultSet rs = stmt.executeQuery("select kx,ky,kz,X from bandstructure_k where compoundid="+id);
+			
+			try {
+				while (rs.next()) {
+					bs = new Bandstructure(rs.getString("kx"),rs.getString("ky"),rs.getString("kz"),rs.getString("X"));
+					bs.BandEnergy= GetBandEnergy(id);
+					}
+				rs.close();
+				stmt.close();
+				conn.close();
+			
+			} catch (Exception ex) {
+				ex.printStackTrace();
+				System.out.print(ex.getMessage());
+			}
+		} catch (Exception ex) {
+            ex.printStackTrace();
+            System.out.print(ex.getMessage());
+		}
+		finally
+		{
+			if(stmt!=null)
+				try {
+					stmt.close();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+		}
+		
+
+		
+		// TODO Auto-generated method stub
+		return bs;
+	}
+
+
+
+	private ArrayList<BandstructureEnergy> GetBandEnergy(int id) {
+		ArrayList<BandstructureEnergy> be = new ArrayList();
+		Statement stmt = null;
+		try {
+			Connection conn = DataUtils.CreateConnection();
+			stmt = conn.createStatement();
+			                   
+			ResultSet rs = stmt.executeQuery("select `index`,energy from bandstructure_all where compoundid="+id);
+			
+			try {
+				while (rs.next()) {
+					be.add(new BandstructureEnergy(rs.getInt("index"),rs.getString("energy")));
+					
+					}
+				rs.close();
+				stmt.close();
+				conn.close();
+			
+			} catch (Exception ex) {
+				ex.printStackTrace();
+				System.out.print(ex.getMessage());
+			}
+		} catch (Exception ex) {
+            ex.printStackTrace();
+            System.out.print(ex.getMessage());
+		}
+		finally
+		{
+			if(stmt!=null)
+				try {
+					stmt.close();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+		}
+		
+
+		
+		
+		// TODO Auto-generated method stub
+		return be;
 	}
 }

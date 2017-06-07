@@ -1,0 +1,6 @@
+package fesdweb.model;
+
+public class BandstructureEnergy {
+	public int Index;
+	public String Energy;
+}
