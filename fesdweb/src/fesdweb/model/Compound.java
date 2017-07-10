@@ -1,6 +1,6 @@
 package fesdweb.model;
 
-
+import java.util.ArrayList;
 
 public class Compound {
 	public int AtomicNo; 
@@ -24,7 +24,7 @@ public class Compound {
 	public boolean Dos1Exists;
 	public boolean Dos2Exists;
 	public boolean Dos3Exists;
-	public Bandstructure Band;
+	public ArrayList<Bandstructure> BandStructures;
 	public Compound(int atomicNo, int codID, String formula, int spaceGroup, String crystalSystem, String spaceGroupName, int id, String source, int icsdId) {
 
 		AtomicNo  = atomicNo;
@@ -36,6 +36,7 @@ public class Compound {
 		Id = id;
 		Source =source;
 		ICSDID = icsdId;
+		BandStructures= new ArrayList();
 	}
 	
 
