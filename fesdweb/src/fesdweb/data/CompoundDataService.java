@@ -13,12 +13,14 @@ import fesdweb.model.Compound;
 import fesdweb.model.Element;
 
 
-
 public class CompoundDataService {
 
+	BandstructureDataService _BandstructureData;
 	
 	public CompoundDataService()
-	{}
+	{
+		_BandstructureData = new BandstructureDataService();
+	}
 	
 	
 
@@ -44,10 +46,10 @@ public class CompoundDataService {
 							continue;
 						Compound c = new Compound(atomicNo, rs.getInt("_cod_database_code"),formula,  rs.getInt("_space_group_IT_number"), rs.getString("_symmetry_cell_setting"),
 								rs.getString("_symmetry_space_group_name_HM"),rs.getInt("id"),rs.getString("source"),rs.getInt("_database_code_ICSD"));
-						c.BSExists= DataUtils.FileExists(c.Source, c.Source.equals("cod")?c.CodID+"":c.ICSDID+"", "bs");
-						c.Dos1Exists = DataUtils.FileExists(c.Source, c.Source.equals("cod")?c.CodID+"":c.ICSDID+"1", "dos");
-						c.Dos2Exists = DataUtils.FileExists(c.Source, c.Source.equals("cod")?c.CodID+"":c.ICSDID+"2", "dos");
-						c.Dos3Exists = DataUtils.FileExists(c.Source, c.Source.equals("cod")?c.CodID+"":c.ICSDID+"3", "dos");
+						//c.BSExists= DataUtils.FileExists(c.Source, c.Source.equals("cod")?c.CodID+"":c.ICSDID+"", "bs");
+						//c.Dos1Exists = DataUtils.FileExists(c.Source, c.Source.equals("cod")?c.CodID+"":c.ICSDID+"1", "dos");
+						//c.Dos2Exists = DataUtils.FileExists(c.Source, c.Source.equals("cod")?c.CodID+"":c.ICSDID+"2", "dos");
+						//c.Dos3Exists = DataUtils.FileExists(c.Source, c.Source.equals("cod")?c.CodID+"":c.ICSDID+"3", "dos");
 						compoundList.add(c); 
 				}
 				rs.close();
@@ -118,20 +120,20 @@ public class CompoundDataService {
 			Connection conn = DataUtils.CreateConnection();
 			stmt = conn.createStatement();
 			                   
-			ResultSet rs = stmt.executeQuery("SELECT atomicno,_chemical_formula_structural,_chemical_formula_sum,_space_group_IT_number,"
+			ResultSet rs = stmt.executeQuery("SELECT id,atomicno,_chemical_formula_structural,_chemical_formula_sum,_space_group_IT_number,"
 					+"_symmetry_cell_setting,_symmetry_space_group_name_Hall,_symmetry_space_group_name_HM,_cell_angle_alpha,"
 					+"_cell_formula_units_Z,_cell_length_a,_cell_length_b,_cell_length_c,_cell_volume,_cod_database_code,source,_database_code_ICSD FROM compound Where id="+id);
 			
 			try {
 				while (rs.next()) {
-					 c = new Compound(rs.getInt("atomicNo"), rs.getInt("_cod_database_code"),rs.getString("_chemical_formula_sum"),  rs.getInt("_space_group_IT_number"), rs.getString("_symmetry_cell_setting"), 
+					 c = new Compound(rs.getInt("id"),rs.getInt("atomicNo"), rs.getInt("_cod_database_code"),rs.getString("_chemical_formula_sum"),  rs.getInt("_space_group_IT_number"), rs.getString("_symmetry_cell_setting"), 
 							 rs.getString("_symmetry_space_group_name_HM"),rs.getString("_symmetry_space_group_name_Hall"),rs.getString("_cell_angle_alpha"),rs.getString("_cell_formula_units_Z"),rs.getString("_cell_length_a"),rs.getString("_cell_length_b")
 							 ,rs.getString("_cell_length_c"),rs.getString("_cell_volume"),rs.getString("source"),rs.getInt("_database_code_ICSD"));
 					c.BSExists= DataUtils.FileExists(c.Source, c.Source.equals("cod")?c.CodID+"":c.ICSDID+"", "bs");
 					c.Dos1Exists = DataUtils.FileExists(c.Source, c.Source.equals("cod")?c.CodID+"":c.ICSDID+"1", "dos");
 					c.Dos2Exists = DataUtils.FileExists(c.Source, c.Source.equals("cod")?c.CodID+"":c.ICSDID+"2", "dos");
 					c.Dos3Exists = DataUtils.FileExists(c.Source, c.Source.equals("cod")?c.CodID+"":c.ICSDID+"3", "dos");
-					c.BandStructures = GetBandstructures(c.ICSDID,c.Source);
+					c.BandStructures = _BandstructureData.GetBandstructures(c.ICSDID,c.Source);
 					}
 				rs.close();
 				stmt.close();
@@ -158,91 +160,5 @@ public class CompoundDataService {
 		
 
 		return c;
-	}
-
-
-
-	private ArrayList<Bandstructure> GetBandstructures(int dbId,String source) {
-		ArrayList<Bandstructure> bs = new ArrayList();
-		
-		Statement stmt = null;
-		try {
-			Connection conn = DataUtils.CreateConnection();
-			stmt = conn.createStatement();
-			                   
-			ResultSet rs = stmt.executeQuery("select `index`,energy from bandstructure where database_id="+dbId+" and source='"+source+"'");
-			
-			try {
-				while (rs.next()) {
-					bs.add(new Bandstructure(rs.getInt("index"),rs.getString("energy")));
-					}
-				rs.close();
-				stmt.close();
-				conn.close();
-			
-			} catch (Exception ex) {
-				ex.printStackTrace();
-				System.out.print(ex.getMessage());
-			}
-		} catch (Exception ex) {
-            ex.printStackTrace();
-            System.out.print(ex.getMessage());
-		}
-		finally
-		{
-			if(stmt!=null)
-				try {
-					stmt.close();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-		}
-		return bs;
-	}
-
-
-
-	private ArrayList<BandstructureEnergy> GetBandEnergy(int id) {
-		ArrayList<BandstructureEnergy> be = new ArrayList();
-		Statement stmt = null;
-		try {
-			Connection conn = DataUtils.CreateConnection();
-			stmt = conn.createStatement();
-			                   
-			ResultSet rs = stmt.executeQuery("select `index`,energy from bandstructure_all where compoundid="+id);
-			
-			try {
-				while (rs.next()) {
-					be.add(new BandstructureEnergy(rs.getInt("index"),rs.getString("energy")));
-					
-					}
-				rs.close();
-				stmt.close();
-				conn.close();
-			
-			} catch (Exception ex) {
-				ex.printStackTrace();
-				System.out.print(ex.getMessage());
-			}
-		} catch (Exception ex) {
-            ex.printStackTrace();
-            System.out.print(ex.getMessage());
-		}
-		finally
-		{
-			if(stmt!=null)
-				try {
-					stmt.close();
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-		}
-		
-
-		
-		
-		// TODO Auto-generated method stub
-		return be;
 	}
 }

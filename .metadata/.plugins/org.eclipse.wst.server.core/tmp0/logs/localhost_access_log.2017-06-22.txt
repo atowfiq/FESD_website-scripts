@@ -1,0 +1,12 @@
+127.0.0.1 - - [22/Jun/2017:15:30:01 -0600] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1 - - [22/Jun/2017:15:30:02 -0600] "GET /fesdweb/WEB-INF/classes/fesdweb/model/Bandstructure.java HTTP/1.1" 404 949
+0:0:0:0:0:0:0:1 - - [22/Jun/2017:15:30:09 -0600] "GET /fesdweb/index.jsp HTTP/1.1" 200 39699
+0:0:0:0:0:0:0:1 - - [22/Jun/2017:15:30:09 -0600] "GET /favicon.ico HTTP/1.1" 404 973
+0:0:0:0:0:0:0:1 - - [22/Jun/2017:15:30:12 -0600] "GET /fesdweb/Element.jsp?atomicNo=92 HTTP/1.1" 200 18879
+0:0:0:0:0:0:0:1 - - [22/Jun/2017:15:30:13 -0600] "GET /fesdweb/ElementServlet?AtomicNo=92 HTTP/1.1" 200 914
+0:0:0:0:0:0:0:1 - - [22/Jun/2017:15:30:18 -0600] "GET /fesdweb/CompoundServlet?AtomicNo=92&AE=&IsShowAll=true&SpaceGroup=0&CrystalSystem=&RestrictNumberOfElements=All&cifId= HTTP/1.1" 200 1981197
+0:0:0:0:0:0:0:1 - - [22/Jun/2017:15:32:55 -0600] "GET /fesdweb/SingleCompound.jsp?Id=79943 HTTP/1.1" 200 21422
+0:0:0:0:0:0:0:1 - - [22/Jun/2017:15:32:59 -0600] "GET /fesdweb/SingleCompoundServlet?Id=79943 HTTP/1.1" 200 92509
+0:0:0:0:0:0:0:1 - - [22/Jun/2017:15:33:03 -0600] "GET /static/View/ HTTP/1.1" 404 975
+0:0:0:0:0:0:0:1 - - [22/Jun/2017:15:33:08 -0600] "GET /fesdweb/BandStructureServlet?index=13&source=icsd&database_id=29086 HTTP/1.1" 200 66376
+0:0:0:0:0:0:0:1 - - [22/Jun/2017:15:35:39 -0600] "GET /fesdweb/BandStructureServlet?index=10&source=icsd&database_id=29086 HTTP/1.1" 200 66376

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename compilation unit &apos;fesdweb.web.AdvancedSearch.java&apos; to &apos;AdvancedSearchServlet.java&apos;&#x0D;&#x0A;- Original project: &apos;fesdweb&apos;&#x0D;&#x0A;- Original element: &apos;fesdweb.web.AdvancedSearch.java&apos;&#x0D;&#x0A;- Renamed element: &apos;fesdweb.web.AdvancedSearchServlet.java&apos;" description="Rename compilation unit &apos;AdvancedSearch.java&apos;" flags="2" id="org.eclipse.jdt.ui.rename.compilationunit" input="/src&lt;fesdweb.web{AdvancedSearch.java" name="AdvancedSearchServlet.java" references="false" stamp="1500832297526" version="1.0"/>
+</session>

@@ -33,17 +33,18 @@ public class Compound {
 		SpaceGroup = spaceGroup;
 		CrystalSystem = crystalSystem;
 		SpaceGroupName = spaceGroupName;
-		Id = id;
 		Source =source;
 		ICSDID = icsdId;
+		Id= id;
 		BandStructures= new ArrayList();
 	}
 	
 
 
-	public Compound(int atomicNo, int codID, String formula, int spaceGroup, String crystalSystem, String spaceGroupName, String _symmetry_space_group_name_Hall,
+	public Compound(int id,int atomicNo, int codID, String formula, int spaceGroup, String crystalSystem, String spaceGroupName, String _symmetry_space_group_name_Hall,
 			String _cell_angle_alpha, String _cell_formula_units_Z, String _cell_length_a, String _cell_length_b, String _cell_length_c, String _cell_volume,String source, int icsdId) {
 		// TODO Auto-generated constructor stub
+		Id =id;
 		AtomicNo  = atomicNo;
 		CodID =  codID;
 		Formula = formula;

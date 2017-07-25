@@ -45,4 +45,6 @@
 <fullyQualifiedTypeName name="java.io.IOException"/>
 <fullyQualifiedTypeName name="javax.servlet.http.HttpServlet"/>
 <fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
+<fullyQualifiedTypeName name="fesdweb.web.AdvancedSearchServlet"/>
+<fullyQualifiedTypeName name="fesdweb.data.AdvancedSearchDataService"/>
 </qualifiedTypeNameHistroy>

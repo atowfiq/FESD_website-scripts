@@ -38,12 +38,11 @@ public class ElementServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int atomicNo = Integer.parseInt(request.getParameter("AtomicNo").toString());
-		System.out.println(atomicNo);
 			 
 		
 		ElementPageData  elementData = new ElementPageData();
-		
-		elementData.ElementObj  = _Service.GetElement(atomicNo);
+		if(atomicNo>0)
+			elementData.ElementObj  = _Service.GetElement(atomicNo);
 		//elementData.SpaceGroupSymmetry = _Service.GetSpaceGroup(atomicNo);
 		elementData.SpaceGroupCellSetting = _Service.GetSpaceGroupCellSetting();
 		elementData.AllElements = _Service.GetAllElements();
