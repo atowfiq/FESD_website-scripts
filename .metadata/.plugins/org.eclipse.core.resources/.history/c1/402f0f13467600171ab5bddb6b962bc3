@@ -24,7 +24,7 @@ public class Compound {
 	public boolean DosExists;
 
 	public ArrayList<Bandstructure> BandStructures;
-	public Compound(int atomicNo, int codID, String formula, int spaceGroup, String crystalSystem, String spaceGroupName, int id, String source, int icsdId,boolean bandExists,boolean de) {
+	public Compound(int atomicNo, int codID, String formula, int spaceGroup, String crystalSystem, String spaceGroupName, int id, String source, int icsdId) {
 
 		AtomicNo  = atomicNo;
 		CodID =  codID;
@@ -36,8 +36,6 @@ public class Compound {
 		ICSDID = icsdId;
 		Id= id;
 		BandStructures= new ArrayList();
-		BSExists = bandExists;
-		DosExists = de;
 	}
 	
 

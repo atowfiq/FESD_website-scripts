@@ -366,7 +366,7 @@ display: none;
 	<th>Space Group</th>
 	<th>Crystal System</th>
 	  <th>Space Group Name</th>
-	  <th>Band</th>
+	  <th>Bands</th>
 	  <th>Dos</th>
 	  <th>CIF</th>
 	  

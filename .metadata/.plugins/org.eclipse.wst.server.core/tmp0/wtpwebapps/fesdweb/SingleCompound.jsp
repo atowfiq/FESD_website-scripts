@@ -214,32 +214,14 @@ function ViewDos(id)
 </tr>
 {{/if}}	 
 
-{{if Dos1Exists}}
-<tr>
-<td><strong>Dos 1</strong></td>
-<td><button style="width:180px;" class="btn btn-secondary" onclick="ViewCompoundProperties('dos1')">Dos 1</button></td>
-</tr>
-{{/if}}	 
-
-{{if Dos2Exists}}
-<tr>
-<td><strong>Dos 2</strong></td>
-<td><button style="width:180px;" class="btn btn-secondary" onclick="ViewCompoundProperties('dos2')">Dos 2</button></td>
-</tr>
-{{/if}}
-{{if Dos3Exists}}
-<tr>
-<td><strong>Dos 3</strong></td>
-<td><button style="width:180px;" class="btn btn-secondary" onclick="ViewCompoundProperties('dos3')">Dos 3</button></td>
-</tr>
-{{/if}}	 
 
 
+{{if DosExists}}
 <tr>
 <td><strong>Dos</strong></td>
 <td><button style="width:180px;" class="btn btn-secondary" onclick="ViewDos({{html Id}})">Dos</button></td>
 </tr>
-
+{{/if}}	 
 <tr>
 <td><strong>CIF</strong></td>
 <td>

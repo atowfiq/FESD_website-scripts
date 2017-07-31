@@ -207,27 +207,23 @@ function ViewDos(id)
 
 </tr>
 
+
+
 {{if BSExists}}
-<tr>
-<td><strong>BandStructure</strong></td>
-<td><button style="width:180px;" class="btn btn-secondary" onclick="ViewCompoundProperties('bs')">BandStructure</button></td>
-</tr>
-{{/if}}	 
-
-
-
-{{if DosExists}}
 <tr>
 <td><strong>Dos</strong></td>
 <td><button style="width:180px;" class="btn btn-secondary" onclick="ViewDos({{html Id}})">Dos</button></td>
 </tr>
 {{/if}}	 
+
+{{if DosExists}}
 <tr>
 <td><strong>CIF</strong></td>
 <td>
 <a style="cursor: pointer;" onclick="ViewCIF();">View</a> 
 </td>
 </tr>
+{{/if}}	 
 
 </table>
 </td>

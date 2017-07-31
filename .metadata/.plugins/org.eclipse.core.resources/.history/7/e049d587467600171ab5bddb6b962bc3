@@ -29,7 +29,7 @@ public class AdvancedSearchDataService {
 		
 		try {
 			Statement stmt = conn.createStatement();
-			String compoundQuery = "Select atomicno, _cod_database_code, _chemical_formula_sum,_space_group_IT_number,_symmetry_cell_setting, id, source, _database_code_ICSD , _symmetry_space_group_name_HM,bsexists,dosexists from compound";
+			String compoundQuery = "Select atomicno, _cod_database_code, _chemical_formula_sum,_space_group_IT_number,_symmetry_cell_setting, id, source, _database_code_ICSD , _symmetry_space_group_name_HM from compound";
 			compoundQuery =String.format(compoundQuery+ " where (%s=0 or _space_group_it_number='%s') and (char_length('%s')=0 or _symmetry_cell_setting='%s') and id ",spaceGroup,spaceGroup,crystalSystem,crystalSystem);
 			String bandQuery = String.format(" (compoundid,`index`) in (select compoundid,`index` from bandstructuredata where energymin>=%s and energymax<=%s  )", emin,emax);
 			String q = String.format(compoundQuery + " in (select distinct compoundid from partialbandstructuredata where %s and  %s) order by source desc;" , query,bandQuery);
@@ -38,7 +38,7 @@ public class AdvancedSearchDataService {
 			while (rs.next()) {
 					String formula = rs.getString("_chemical_formula_sum");
 					Compound c = new Compound(rs.getInt("atomicno") , rs.getInt("_cod_database_code"),formula,  rs.getInt("_space_group_IT_number"), rs.getString("_symmetry_cell_setting"),
-							rs.getString("_symmetry_space_group_name_HM"),rs.getInt("id"),rs.getString("source"),rs.getInt("_database_code_ICSD"),rs.getBoolean("bsexists"),rs.getBoolean("dosexists"));
+							rs.getString("_symmetry_space_group_name_HM"),rs.getInt("id"),rs.getString("source"),rs.getInt("_database_code_ICSD"));
 					compoundList.add(c); 
 			}
 			rs.close();

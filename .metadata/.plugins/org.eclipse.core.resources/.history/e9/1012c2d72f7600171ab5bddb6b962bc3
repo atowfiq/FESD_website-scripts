@@ -17,19 +17,19 @@ public class DataUtils {
 	
 	
 	//public static final String FCifPath =//Towfiq:"C:\\Users\\atowf_000\\Desktop\\fcif\\";//IMS:"/home/khair/fesd/fcif/fcif/";//"E:\\fcif\\";//"/home/adnanibnekhair/fesd/fcif/"; //UNM////IMS:
-	/*
+	
 	public static final String DatatabaseUserName ="root";
 	public static final String DatatabasePassword ="root";
 	public static final String DatatabaseName ="fedbfull";//IMS: "fesdb";//"fedb";//
 	public static final String ViewPath ="E:\\fcif\\";///home/khair/Research/Wien2k/Data/View/cif/ //Towfiq:"C:\\Users\\atowf_000\\Desktop\\fcif\\";//IMS:"/home/khair/fesd/fcif/fcif/";//"E:\\fcif\\";//"/home/adnanibnekhair/fesd/fcif/"; //UNM////IMS:
-	  */	////local
+		////local
 	//IMS
-		public static final String DatatabaseUserName ="root";
+	/*	public static final String DatatabaseUserName ="root";
 	public static final String DatatabasePassword ="inshALLAH%6";
 	public static final String DatatabaseName ="fedbfull";//"fesdbfull";//IMS: "fesdb";//"fedb";//
 	//public static final String FCifPath ="/home/khair/Research/Wien2k/Data/View/cif/";//"/home/khair/fesd/fcif/fcif/";//"E:\\fcif\\";//Towfiq:"C:\\Users\\atowf_000\\Desktop\\fcif\\";//IMS:"/home/khair/fesd/fcif/fcif/";//"E:\\fcif\\";//"/home/adnanibnekhair/fesd/fcif/"; //UNM////IMS:
     public static final String ViewPath = "/home/khair/Research/Wien2k/Data/View/";
- 
+*/   
 	
 	public static Connection Conn = null;
 	public DataUtils(){
