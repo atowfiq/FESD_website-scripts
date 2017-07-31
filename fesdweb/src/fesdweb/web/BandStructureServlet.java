@@ -55,7 +55,7 @@ public class BandStructureServlet extends HttpServlet {
 		 double emax = Double.parseDouble(request.getParameter("Emax").toString());
 		 String orbital = request.getParameter("orbital").toString();
 		 String element= request.getParameter("element").toString();
-		
+		 int elementIndex= Integer.parseInt(request.getParameter("elementIndex").toString());
 		 ArrayList<Bandstructure> bs = _BandstructureService.GetBandstructures(compoundid,emin,emax);
 		 ArrayList<CompoundElementOrbital> ceos= new ArrayList<>();
 		 if(element.equals("None"))
@@ -63,7 +63,7 @@ public class BandStructureServlet extends HttpServlet {
 		 
 		 ArrayList<String> orbitalWeight = new ArrayList<>(); 
 		 if(!orbital.equals("None"))
-			 orbitalWeight = _BandstructureService.GetOrbitalWeight(compoundid,element,orbital,bs);
+			 orbitalWeight = _BandstructureService.GetOrbitalWeight(compoundid,element,orbital,bs,elementIndex);
 		 //	Compound c = new CompoundDataService().GetCompoud(codId);
 		//	String cif="";
 		//	int cifId = c.Source.equals("cod")? c.CodID:c.ICSDID;

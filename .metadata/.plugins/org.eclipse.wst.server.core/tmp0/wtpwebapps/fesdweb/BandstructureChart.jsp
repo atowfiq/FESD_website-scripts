@@ -102,6 +102,7 @@
     		      line: {                             // set the width of the line.
     		         width: 1
     		      },
+    		      name:'Band '+ bands[l].Index,
     		      
     		      error_y: {
     		        array: orbitalWeightVal.length==0?w:orbitalWeightVal.map(function(x){return x/2;}),
@@ -149,11 +150,20 @@
       		}
       		$('#dataStatus').show();
       		var eminBC= $("#EminBC").val(),emaxBC=$("#EmaxBC").val();
+      		var compoundElementsText = $("#CompoundElements option:selected").text();
+      		var elemIndex;
+      		var elem="None";
+      		if(compoundElementsText!="None")
+      		{   var splitted= compoundElementsText.split(' ');
+      			elem = splitted[0]
+      			elemIndex =splitted[1]; 
+      		}
       		$.get('BandStructureServlet', {
       			Emin: eminBC.length==0?-10:eminBC,
       			Emax: emaxBC.length==0?10:emaxBC,
-      			element:$("#CompoundElements option:selected").text(),
+      			element:elem,
       			orbital:$("#Orbitals").val(),
+      			elementIndex:elemIndex?elemIndex:0,
       			id:currentCompoundId 
       			 }, function(data) { 
       				// $("#CompoundElements").html(''); 
@@ -166,7 +176,7 @@
       			  	    	
       			  	    	SetOrbitalValue(data.CompoundElementOrbitals[0].Orbital);
       			  	    	$.each(data.CompoundElementOrbitals, function (key, value) {
-      			  	     	   $("#CompoundElements").append($("<option></option>").val(value.Orbital).html(value.Element));
+      			  	     	   $("#CompoundElements").append($("<option></option>").val(value.Orbital).html(value.Element+' '+value.ElementIndex));
       			  	       });
       			  	    	
       			  	    }
@@ -183,10 +193,7 @@
 <body>
 <div  id="BandViewer"  class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" style="width:100%">
     <div class="modal-dialog modal-lg">
-     
-      <!-- Modal content-->
-      
-       
+   
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>

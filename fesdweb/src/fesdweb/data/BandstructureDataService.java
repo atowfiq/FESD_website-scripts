@@ -61,7 +61,7 @@ public class BandstructureDataService  {
 	}
 	
 	
-	public ArrayList<String> GetOrbitalWeight(int compoundid, String element, String orbital,ArrayList<Bandstructure> bands)
+	public ArrayList<String> GetOrbitalWeight(int compoundid, String element, String orbital,ArrayList<Bandstructure> bands,int elementIndex)
 	{
 		ArrayList<String> result = new ArrayList<>();
 		String bs = "";
@@ -76,7 +76,7 @@ public class BandstructureDataService  {
 		try {
 			Connection conn = DataUtils.CreateConnection();
 			stmt = conn.createStatement();
-			String query = String.format("select `%s` from partialbandstructuredata where compoundid =%s and  (compoundid,`index`) in (%s) and element ='%s'",orbital,compoundid,bs,element);                   
+			String query = String.format("select `%s` from partialbandstructuredata where compoundid =%s and  (compoundid,`index`) in (%s) and element ='%s' and elementindex=%s",orbital,compoundid,bs,element,elementIndex);                   
 			ResultSet rs = stmt.executeQuery(query);
 			ResultSetMetaData rsmd = rs.getMetaData();
 			 

@@ -136,6 +136,11 @@ function ViewCompoundProperties(propType)
 }
 
 
+function ViewDos(id)
+{
+	GetDos(id);	
+}
+
 </script>
 
 
@@ -231,6 +236,11 @@ function ViewCompoundProperties(propType)
 
 
 <tr>
+<td><strong>Dos</strong></td>
+<td><button style="width:180px;" class="btn btn-secondary" onclick="ViewDos({{html Id}})">Dos</button></td>
+</tr>
+
+<tr>
 <td><strong>CIF</strong></td>
 <td>
 <a style="cursor: pointer;" onclick="ViewCIF();">View</a> 
@@ -291,6 +301,7 @@ function goBack() {
 <div class="main">
 
 <jsp:include page="BandstructureChart.jsp"/>
+<jsp:include page="DosChart.jsp"/>
 
 <div class="page-header">
 	<h1><span id='CompoundName'></span> </h1>

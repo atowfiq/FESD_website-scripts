@@ -1,0 +1,13 @@
+package fesdweb.model;
+
+public class Dos {
+
+	public String Energy;
+	public String TotalDos;
+	
+	public Dos(String e,String t)
+	{
+		Energy = e;
+		TotalDos = t;
+	}
+}

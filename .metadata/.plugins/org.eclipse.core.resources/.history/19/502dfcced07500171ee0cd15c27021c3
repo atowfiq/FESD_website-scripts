@@ -1,0 +1,10 @@
+package fesdweb.model;
+
+public class PartialDos {
+
+	public String Elemenet;
+	public int ElementIndex;
+	public String PartialDosOrbital;
+	public String PartialDosValue;
+	
+}

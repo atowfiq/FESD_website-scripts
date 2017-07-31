@@ -29,7 +29,6 @@
 <fullyQualifiedTypeName name="java.lang.Exception"/>
 <fullyQualifiedTypeName name="java.util.Comparator"/>
 <fullyQualifiedTypeName name="com.sun.xml.internal.bind.v2.schemagen.xmlschema.List"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="java.util.Collections"/>
 <fullyQualifiedTypeName name="java.lang.Comparable"/>
 <fullyQualifiedTypeName name="fesdweb.model.DataViewerObj"/>
@@ -47,4 +46,7 @@
 <fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
 <fullyQualifiedTypeName name="fesdweb.web.AdvancedSearchServlet"/>
 <fullyQualifiedTypeName name="fesdweb.data.AdvancedSearchDataService"/>
+<fullyQualifiedTypeName name="fesdweb.data.DosDataService"/>
+<fullyQualifiedTypeName name="fesdweb.model.Dos"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
 </qualifiedTypeNameHistroy>
