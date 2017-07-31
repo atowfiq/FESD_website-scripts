@@ -60,6 +60,62 @@ public class BandstructureDataService  {
 		return bs;
 	}
 	
+	public ArrayList<ArrayList<PartialBandstructure>> GetPartialBandstructure(int id,int from, int to) {
+		ArrayList<PartialBandstructure> pbs = new ArrayList();
+		Map<Integer,ArrayList<PartialBandstructure>> map = new HashMap();
+ 		Statement stmt = null;
+		try {
+			Connection conn = DataUtils.CreateConnection();
+			stmt = conn.createStatement();
+			                   
+			ResultSet rs = stmt.executeQuery("select * from partialbandstructuredata where compoundid="+id+" and `index`>="+from+" and `index`<="+to );
+			ResultSetMetaData rsmd = rs.getMetaData();
+			 
+			try {
+					while (rs.next()) 
+					{
+						int elementIndex = rs.getInt("ElementIndex");
+						int index = rs.getInt("index");
+						String element = rs.getString("Element");
+						ArrayList<String> pe = new ArrayList();
+						ArrayList<String> header=new ArrayList();
+						for(int i=5;i<25;i++)
+						{
+							if(rs.getString(i)!=null)
+							{
+								pe.add(rs.getString(i));
+								header.add(rsmd.getColumnName(i));
+							}
+						}
+						if(!map.containsKey(index))
+							map.put(index,new ArrayList());
+						map.get(index).add(new PartialBandstructure(elementIndex,element,pe,header));
+					//	pbs.add(new PartialBandstructure(elementIndex,element,pe,header));
+					}
+				rs.close();
+				stmt.close();
+				conn.close();
+			
+			} catch (Exception ex) {
+				ex.printStackTrace();
+				System.out.print(ex.getMessage());
+			}
+		} catch (Exception ex) {
+            ex.printStackTrace();
+            System.out.print(ex.getMessage());
+		}
+		finally
+		{
+			if(stmt!=null)
+				try {
+					stmt.close();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+		}
+		ArrayList<ArrayList<PartialBandstructure>> r =new ArrayList(map.values());
+		return r;
+	}
 	
 	public ArrayList<String> GetOrbitalWeight(int compoundid, String element, String orbital,ArrayList<Bandstructure> bands)
 	{
@@ -76,7 +132,7 @@ public class BandstructureDataService  {
 		try {
 			Connection conn = DataUtils.CreateConnection();
 			stmt = conn.createStatement();
-			String query = String.format("select `%s` from partialbandstructuredata where compoundid =%s and  (compoundid,`index`) in (%s) and element ='%s'",orbital,compoundid,bs,element);                   
+			String query = String.format("select `%s` from partialbandstructuredata where (compoundid,`index`) in (%s) and element ='%s'",orbital,bs,element);                   
 			ResultSet rs = stmt.executeQuery(query);
 			ResultSetMetaData rsmd = rs.getMetaData();
 			 
