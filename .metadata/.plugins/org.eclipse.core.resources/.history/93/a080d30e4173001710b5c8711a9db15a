@@ -1,0 +1,14 @@
+package fesdweb.model;
+
+public class CompoundElementOrbital {
+	public String Element;
+	public String Orbital;
+	
+	public CompoundElementOrbital(String e, String o)
+	{
+		Element = e;
+		Orbital = o;
+		
+	}
+
+}

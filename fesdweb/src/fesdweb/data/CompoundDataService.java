@@ -10,16 +10,14 @@ import java.util.ArrayList;
 import fesdweb.model.Bandstructure;
 import fesdweb.model.BandstructureEnergy;
 import fesdweb.model.Compound;
+import fesdweb.model.CompoundElementOrbital;
 import fesdweb.model.Element;
 
 
 public class CompoundDataService {
 
-	BandstructureDataService _BandstructureData;
-	
 	public CompoundDataService()
 	{
-		_BandstructureData = new BandstructureDataService();
 	}
 	
 	
@@ -129,11 +127,11 @@ public class CompoundDataService {
 					 c = new Compound(rs.getInt("id"),rs.getInt("atomicNo"), rs.getInt("_cod_database_code"),rs.getString("_chemical_formula_sum"),  rs.getInt("_space_group_IT_number"), rs.getString("_symmetry_cell_setting"), 
 							 rs.getString("_symmetry_space_group_name_HM"),rs.getString("_symmetry_space_group_name_Hall"),rs.getString("_cell_angle_alpha"),rs.getString("_cell_formula_units_Z"),rs.getString("_cell_length_a"),rs.getString("_cell_length_b")
 							 ,rs.getString("_cell_length_c"),rs.getString("_cell_volume"),rs.getString("source"),rs.getInt("_database_code_ICSD"));
-					c.BSExists= DataUtils.FileExists(c.Source, c.Source.equals("cod")?c.CodID+"":c.ICSDID+"", "bs");
-					c.Dos1Exists = DataUtils.FileExists(c.Source, c.Source.equals("cod")?c.CodID+"":c.ICSDID+"1", "dos");
-					c.Dos2Exists = DataUtils.FileExists(c.Source, c.Source.equals("cod")?c.CodID+"":c.ICSDID+"2", "dos");
-					c.Dos3Exists = DataUtils.FileExists(c.Source, c.Source.equals("cod")?c.CodID+"":c.ICSDID+"3", "dos");
-					c.BandStructures = _BandstructureData.GetBandstructures(c.ICSDID,c.Source);
+				//	c.BSExists= DataUtils.FileExists(c.Source, c.Source.equals("cod")?c.CodID+"":c.ICSDID+"", "bs");
+				//	c.Dos1Exists = DataUtils.FileExists(c.Source, c.Source.equals("cod")?c.CodID+"":c.ICSDID+"1", "dos");
+				//	c.Dos2Exists = DataUtils.FileExists(c.Source, c.Source.equals("cod")?c.CodID+"":c.ICSDID+"2", "dos");
+				//	c.Dos3Exists = DataUtils.FileExists(c.Source, c.Source.equals("cod")?c.CodID+"":c.ICSDID+"3", "dos");
+				//c.BandStructures = _BandstructureData.GetBandstructures(c.ICSDID,c.Source);
 					}
 				rs.close();
 				stmt.close();
@@ -160,5 +158,51 @@ public class CompoundDataService {
 		
 
 		return c;
+	}
+	public ArrayList<CompoundElementOrbital> GetCompoundElementOrbital(int compoundid)
+	{
+		ArrayList<CompoundElementOrbital> coes =new ArrayList<>();
+		
+		Statement stmt = null;
+		try {
+			Connection conn = DataUtils.CreateConnection();
+			stmt = conn.createStatement();
+			String query = String.format("SELECT element,elementindex,orbitals FROM compoundorbitals where compoundid = %s", compoundid);                   
+			ResultSet rs = stmt.executeQuery(query);		
+			try {
+				while (rs.next()) {
+					coes.add(new CompoundElementOrbital(rs.getString("element"), rs.getString("orbitals"),rs.getInt("elementindex")));
+		
+				//	c.BSExists= DataUtils.FileExists(c.Source, c.Source.equals("cod")?c.CodID+"":c.ICSDID+"", "bs");
+				//	c.Dos1Exists = DataUtils.FileExists(c.Source, c.Source.equals("cod")?c.CodID+"":c.ICSDID+"1", "dos");
+				//	c.Dos2Exists = DataUtils.FileExists(c.Source, c.Source.equals("cod")?c.CodID+"":c.ICSDID+"2", "dos");
+				//	c.Dos3Exists = DataUtils.FileExists(c.Source, c.Source.equals("cod")?c.CodID+"":c.ICSDID+"3", "dos");
+				//c.BandStructures = _BandstructureData.GetBandstructures(c.ICSDID,c.Source);
+					}
+				rs.close();
+				stmt.close();
+				conn.close();
+			
+			} catch (Exception ex) {
+				ex.printStackTrace();
+				System.out.print(ex.getMessage());
+			}
+		} catch (Exception ex) {
+            ex.printStackTrace();
+            System.out.print(ex.getMessage());
+		}
+		finally
+		{
+			if(stmt!=null)
+				try {
+					stmt.close();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+		}
+		
+
+		return coes;
 	}
 }

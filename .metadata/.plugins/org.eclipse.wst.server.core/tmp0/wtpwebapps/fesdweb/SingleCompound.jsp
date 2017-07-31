@@ -14,112 +14,9 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 <script src="js/jquery.tmpl.js" type="text/javascript"></script> 
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <script type="text/javascript">
-      
-      function drawChart(bands) {
-    	  
-    	
-    	  
-    	//  $("#Bands").append($("<option></option>").val('All').html('All'));
-     	  $.each(bands, function (key, value) {
-
- 	         $("#BandsFrom").append($("<option></option>").val(value.Index).html(value.Index));
- 	        $("#BandsTo").append($("<option></option>").val(value.Index).html(value.Index));
- 	 	        
-     	  });
-     	  
-     	 drawBandChart(bands);
-     	  
-          }
-      
-      	  function drawBandChart(bands)
-      	  {
-      		
-       	  
-      	  BandChart = document.getElementById('BandChart');
-      	  Plotly.purge(BandChart);
-  		
-      	  var data =[];
-      	  var dx=[];
-    	  for(var i=0;i<bands[0].Energy.split(", ").length;i++)
-    	         	  dx.push(i);
-      	  for(var l=0;l<bands.length;l++)
-      		{
-      	
-      		  data.push({x:dx,y:bands[l].Energy.split(", ")});
-      		}
-      	  /* [{
-      	      x: [1, 2, 3, 4, 5],
-      	      y: [1, 2, 4, 8, 16],
-      	  	},{
-      	      x: [1, 2, 3, 4, 5],
-      	      y: [2, 4, 6, 8, 16],
-      	  	}]*/
-
-      	 var layout = {
-       			  title: 'Bandstructure' + Compound.Formula,
-       			 
-       			  yaxis: {
-       			    range: [-10, 10],
-       			    autorange: false
-       			  },
-       			  
-       			};
-      	  Plotly.plot( BandChart,data, layout );
-      	  }
-      	  
-      	  function drawChartSingleBand(index,bands,orbitalValue)
-      	  {
-      		  
-      		  
-      		 
-      		 BandChart = document.getElementById('BandChart');
-      		 Plotly.purge(BandChart);
-      		
-      		 var data =[];
-         	  var dx=[];
-         	  for(var i=0;i<bands[index].Energy.split(", ").length;i++)
-         		  dx.push(i);
-         	 
-         	var weight= orbitalValue.split(", ");
-         	
-         	
-         	// data.push({x:dx,y:bands[index].Energy.split(", ")});
-         	  data.push({x:dx,
-         			  y:bands[index].Energy.split(", "),
-         			  type: 'scatter',                    // set the chart type
-        		      mode: 'lines',   
-        		      line: {                             // set the width of the line.
-        		         width: 1
-        		      },
-        		      
-        		      error_y: {
-        		        array: weight.map(function(x) { return x ; }),
-        		        thickness: 0.5,                   // set the thickness of the error bars
-        		        width: 0
-        		      }
-         		  
-         		  
-         		  });
-         	  
-       
-
-         	  Plotly.plot( BandChart,data, { 
-         	      margin: { t: 0 } } );
- 
-      		  
-      		  
-      	  }
-      	
-     
-  	
-    </script>
 <script type="text/javascript">
 
 $(document).ready(function(){
-		
-	
-	
 	$.get('SingleCompoundServlet', {
 		Id: <%=request.getParameter("Id")%> 
 		 }, function(compound) { 
@@ -138,30 +35,6 @@ $(document).ready(function(){
 
 
 	
-	});
-	$('#Bands').change(function() {
-	
-			currentBand=$(this).val();
-		       drawChartSingleBand($(this).val(),Compound.BandStructures,'');
-		       
-				
-		});
-		
-	$("#CompoundElements").change(function() {
-		var obj = JSON.parse($(this).val());
-		var header = obj.Header;
-		var partialEnergery = obj.PartialEnergy;
-		 $("#Orbitals").html(''); 
-		    $("#Orbitals").append($("<option></option>").val("None").html("None"));			
-		 $.each(header, function (key, value) {
-	  	         $("#Orbitals").append($("<option></option>").val(partialEnergery[key]).html(value));
-	  	       });
-
-	});
-	
-	$("#Orbitals").change(function() {
-		
-		drawChartSingleBand(currentBand,Compound.BandStructures,$(this).val());
 	});
 	
 	
@@ -215,33 +88,6 @@ function DownloadCIF()
 
 
 
-function GetBandstructures()
-{
-	var bandsFrom=$("#BandsFrom").val(),bandsTo =$("#BandsTo").val(); 
-	if(bandsFrom>bandsTo)
-	{
-		alert("Bands from should be less than bands to.");
-		return;
-	}
-	$.get('BandStructureServlet', {
-		from: bandsFrom,
-		to: bandsTo,
-		id:Compound.Id
-		 }, function(data) { 
-			 $("#CompoundElements").html(''); 
-			    $("#CompoundElements").append($("<option></option>").val("None").html("None"));
-		  	     $.each(data, function (key, value) {
-	     		  
-		  	         $("#CompoundElements").append($("<option></option>").val(JSON.stringify({Header: value.Header,PartialEnergy:value.PartialEnergy})).html(value.Element+" "+value.ElementIndex));
-		  	       });
-	     	  
-	     	  
-
-	});
-
-
-	
-}
 
 
 function ViewCompoundProperties(propType)
@@ -285,12 +131,12 @@ function ViewCompoundProperties(propType)
 	$('#Viewer').modal();	
 //	$('#ViewerContent').html(propType);
      $('#imagepreview').attr('src', src);   
-     $('#Viewer').on('shown.bs.modal', function () {
-    	
-	  
-
-    	 drawChart(Compound.BandStructures);
-    	});
+     $('#Viewer').modal('show');
+     //$('#Viewer').on('shown.bs.modal', function () {
+    	//GetBandstructures(Compound.Id);
+    	//alert('hello');
+    	//});
+     GetBandstructures(Compound.Id);
 }
 
 
@@ -445,8 +291,10 @@ function goBack() {
 <body>
 <jsp:include page="topBar.jsp"/>
 <jsp:include page="leftSidebar.jsp"/>
+
 <div class="main">
 
+<jsp:include page="BandstructureChart.jsp"/>
 
 <div class="page-header">
 	<h1><span id='CompoundName'></span> </h1>
@@ -496,54 +344,7 @@ function goBack() {
     </div>
   </div>
   	
-	<div  id="Viewer"  class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" style="width:100%">
-    <div class="modal-dialog modal-lg">
-     
-      <!-- Modal content-->
-      
-       
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title" id="CompoundFormulaName"></h4>
-          
-        </div>
-        <div class="modal-body">
-    <div>
-    <label  class="control-label ">Bandstructures</label> <input id="AllBandstructures" type="checkbox" value="All">
-		
-	</div>	
-	<div>
 	
-	<label  class="control-label ">From</label> <select style="width: 150px; "  id="BandsFrom">
-			
-		</select>
-		<label  class="control-label ">To</label> <select style="width: 150px; "  id="BandsTo">
-			
-		</select>
-		
-	</div>
-	<button style="width:180px;" class="btn btn-secondary" onclick="GetBandstructures()">Get BandStructures</button>
-	
-   <div id="BandChart" style="width: 900px; height: 500px"></div>
-   
-   
- <label  class="control-label ">Element </label> <select style="width: 100px; "  id="CompoundElements">
-			
-		</select> 
-		<label  class="control-label ">Orbital</label> <select style="width: 150px; "  id="Orbitals">
-			
-		</select>
-<div id="ViewerContent"  style="display: none;"> <img src="" id="imagepreview" style="padding: 5px; width: 800px; height: 600px;" ></div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-      
-    </div>
-  </div>
-  
 </div>
 
 

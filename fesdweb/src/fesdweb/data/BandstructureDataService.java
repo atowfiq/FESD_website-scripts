@@ -24,15 +24,14 @@ public class BandstructureDataService  {
 	public BandstructureDataService()
 	{}
 	
-	public ArrayList<Bandstructure> GetBandstructures(int dbId,String source) {
+	public ArrayList<Bandstructure> GetBandstructures(int compoundId, double emin,double emax) {
 		ArrayList<Bandstructure> bs = new ArrayList();
 		Statement stmt = null;
 		try {
 			Connection conn = DataUtils.CreateConnection();
 			stmt = conn.createStatement();
-			                   
-			ResultSet rs = stmt.executeQuery("select `index`,energy from bandstructuredata where database_id="+dbId+" and source='"+source+"'");
-			
+			String query =  String.format("select `index`,energy from bandstructuredata where compoundid = %s and energymin>=%s and energymax<=%s", compoundId,emin,emax);                   
+			ResultSet rs = stmt.executeQuery(query);	
 			try {
 				while (rs.next()) {
 					bs.add(new Bandstructure(rs.getInt("index"),rs.getString("energy")));
@@ -116,6 +115,54 @@ public class BandstructureDataService  {
 		}
 		ArrayList<ArrayList<PartialBandstructure>> r =new ArrayList(map.values());
 		return r;
+	}
+	
+	public ArrayList<String> GetOrbitalWeight(int compoundid, String element, String orbital,ArrayList<Bandstructure> bands)
+	{
+		ArrayList<String> result = new ArrayList<>();
+		String bs = "";
+		
+		for(Bandstructure b :bands)
+		{
+			if(bs.length()>0)
+				bs=bs+",";
+			bs = bs+"("+compoundid+","+b.Index+")";
+		}
+		Statement stmt = null;
+		try {
+			Connection conn = DataUtils.CreateConnection();
+			stmt = conn.createStatement();
+			String query = String.format("select %s from partialbandstructuredata where (compoundid,`index`) in (%s) and element ='%s'",orbital,bs,element);                   
+			ResultSet rs = stmt.executeQuery(query);
+			ResultSetMetaData rsmd = rs.getMetaData();
+			 
+			try {
+					while (rs.next()) 
+					{
+						result.add(rs.getString(orbital));
+					}
+				rs.close();
+				stmt.close();
+				conn.close();
+			
+			} catch (Exception ex) {
+				ex.printStackTrace();
+				System.out.print(ex.getMessage());
+			}
+		} catch (Exception ex) {
+            ex.printStackTrace();
+            System.out.print(ex.getMessage());
+		}
+		finally
+		{
+			if(stmt!=null)
+				try {
+					stmt.close();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+		}
+		return result;
 	}
 }
 

@@ -1,0 +1,13 @@
+package fesdweb.web;
+
+import java.util.ArrayList;
+
+import fesdweb.model.Bandstructure;
+import fesdweb.model.CompoundElementOrbital;
+
+public class BandstructureChartData {
+	 ArrayList<Bandstructure> Bands;
+	 ArrayList<CompoundElementOrbital> CompoundElementOrbitals;
+	 
+
+}

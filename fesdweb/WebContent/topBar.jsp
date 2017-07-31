@@ -9,8 +9,6 @@
 }
 html *
 {
-  
-   
    font-family: sans-serif ;
 }
     body,html{

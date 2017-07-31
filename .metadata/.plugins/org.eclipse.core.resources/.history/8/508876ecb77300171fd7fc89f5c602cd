@@ -1,0 +1,15 @@
+package fesdweb.model;
+
+import java.util.ArrayList;
+
+public class BandstructureChartData {
+	 ArrayList<Bandstructure> Bands;
+	 ArrayList<CompoundElementOrbital> CompoundElementOrbitals;
+	 
+	 public BandstructureChartData(ArrayList<Bandstructure> bs,ArrayList<CompoundElementOrbital>  ceos)
+	 {
+		 Bands = bs;
+		 CompoundElementOrbitals = ceos;
+	 }
+
+}

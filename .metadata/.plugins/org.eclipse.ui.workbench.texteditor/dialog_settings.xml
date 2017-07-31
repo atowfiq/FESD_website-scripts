@@ -3,26 +3,26 @@
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="257" key="DIALOG_WIDTH"/>
 		<item value="180" key="DIALOG_Y_ORIGIN"/>
-		<item value="915" key="DIALOG_X_ORIGIN"/>
 		<item value="371" key="DIALOG_HEIGHT"/>
+		<item value="915" key="DIALOG_X_ORIGIN"/>
 		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="true" key="wrap"/>
-		<item value="false" key="casesensitive"/>
 		<item value="false" key="isRegEx"/>
+		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="title" key="selection"/>
+		<item value="Emin" key="selection"/>
 		<list key="findhistory">
+			<item value="Emin"/>
+			<item value="include"/>
+			<item value="function ViewCompoundProperties"/>
+			<item value="ViewCompoundProperties"/>
+			<item value="bandstructure"/>
+			<item value="bands"/>
+			<item value="drawChart"/>
 			<item value="title"/>
-			<item value="Title"/>
-			<item value="const"/>
-			<item value="under"/>
-			<item value="SearchCompound"/>
-			<item value="AdvanceSearch"/>
-			<item value="Sear"/>
-			<item value="orbitalrelation"/>
 		</list>
 		<list key="replacehistory">
 		</list>
