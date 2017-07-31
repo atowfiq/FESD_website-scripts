@@ -13,7 +13,6 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 <script src="js/jquery.tmpl.js" type="text/javascript"></script> 
-<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script type="text/javascript">
 
 $(document).ready(function(){
@@ -128,10 +127,7 @@ function ViewCompoundProperties(propType)
 		
 	}
 	
-	$('#Viewer').modal();	
-//	$('#ViewerContent').html(propType);
-     $('#imagepreview').attr('src', src);   
-     $('#Viewer').modal('show');
+	  $('#BandViewer').modal('show');
      //$('#Viewer').on('shown.bs.modal', function () {
     	//GetBandstructures(Compound.Id);
     	//alert('hello');

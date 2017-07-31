@@ -5,11 +5,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Bandstructure</title>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
 <style type="text/css">
-.main{
-margin-top:-40px;
-}
 
 
 .modal .modal-body {
@@ -97,7 +95,6 @@ margin-top:-40px;
       		  var orbitalWeightVal=[];
       		  if(orbitalWeight.length>0)
       		  	orbitalWeightVal =orbitalWeight[l].split(", ");
-      		 // data.push({x:dx,y:yval,error_y: orbitalWeightVal});
       		  data.push({x:dx,
      			  y:yval,
      			  type: 'scatter',                    // set the chart type
@@ -107,7 +104,7 @@ margin-top:-40px;
     		      },
     		      
     		      error_y: {
-    		        array: orbitalWeightVal.length==0?w:orbitalWeightVal,
+    		        array: orbitalWeightVal.length==0?w:orbitalWeightVal.map(function(x){return x/2;}),
     		        thickness: 0.5,                   // set the thickness of the error bars
     		        width: 0
     		      }
@@ -117,78 +114,40 @@ margin-top:-40px;
      	  
       		}
       	  
-      	  
-      	  /* [{
-      	      x: [1, 2, 3, 4, 5],
-      	      y: [1, 2, 4, 8, 16],
-      	  	},{
-      	      x: [1, 2, 3, 4, 5],
-      	      y: [2, 4, 6, 8, 16],
-      	  	}]*/
-
+      	
       	 var layout = {
-       			  title: 'Bandstructure ' + Compound.Formula,
+       			  title: 'Bandstructure ' ,
        			 
-       			  yaxis: {
-       			    range: [-10, 10],
-       			    autorange: false
-       			  },
+       			
        			  
        			};
       	  Plotly.plot( BandChart,data, layout );
       	  }
       	  
-      	  function drawChartSingleBand(index,bands,orbitalValue)
-      	  {
-      		  
-      		 
-      		 BandChart = document.getElementById('BandChart');
-      		 Plotly.purge(BandChart);
-      		
-      		 var data =[];
-         	  var dx=[];
-         	  for(var i=0;i<bands[index].Energy.split(", ").length;i++)
-         		  dx.push(i);
-         	 
-         	var weight= orbitalValue.split(", ");
-         	
-         	
-         	// data.push({x:dx,y:bands[index].Energy.split(", ")});
-         	  data.push({x:dx,
-         			  y:bands[index].Energy.split(", "),
-         			  type: 'scatter',                    // set the chart type
-        		      mode: 'lines',   
-        		      line: {                             // set the width of the line.
-        		         width: 1
-        		      },
-        		      
-        		      error_y: {
-        		        array: orbitalWeight,
-        		        thickness: 0.5,                   // set the thickness of the error bars
-        		        width: 0
-        		      }
-         		  
-         		  
-         		  });
-         	  
-       
-
-         	  Plotly.plot( BandChart,data, { 
-         	      margin: { t: 0 } } );
- 
-      		  
-      		  
-      	  }
-      	
+      
       	
       	  
       	  
       	function GetBandstructures(compoundid)
       	{
       		if(compoundid)
-      			currentCompoundId = compoundid;
-      		
-      		
+      		{
+      			if(!currentCompoundId)
+      				currentCompoundId = compoundid;
+      			else if(currentCompoundId!=compoundid)
+      			{
+      				currentCompoundId = compoundid;
+          			
+      				$("#CompoundElements").html('');
+      				$("#CompoundElements").append($("<option></option>").val("None").html("None"));
+  			  	    	
+      				$("#Orbitals").html(''); 
+      		        $("#Orbitals").append($("<option></option>").val("None").html("None"));
+      			  	 
+      			}
+      			
+      		}
+      		$('#dataStatus').show();
       		var eminBC= $("#EminBC").val(),emaxBC=$("#EmaxBC").val();
       		$.get('BandStructureServlet', {
       			Emin: eminBC.length==0?-10:eminBC,
@@ -199,7 +158,7 @@ margin-top:-40px;
       			 }, function(data) { 
       				// $("#CompoundElements").html(''); 
       			//	    $("#CompoundElements").append($("<option></option>").val("None").html("None"));
-      			  	    
+      			  	    $('#dataStatus').hide();
       					if(data.CompoundElementOrbitals.length>0)
       			  	    {
       			  	    	$("#CompoundElements").html('');
@@ -222,7 +181,7 @@ margin-top:-40px;
 
 </head>
 <body>
-<div  id="Viewer"  class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" style="width:100%">
+<div  id="BandViewer"  class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" style="width:100%">
     <div class="modal-dialog modal-lg">
      
       <!-- Modal content-->
@@ -251,6 +210,8 @@ margin-top:-40px;
     	 
 		<label  class="control-label ">Orbital</label>
     	</td>
+    	<td>
+    	</td>
     </tr>
     <tr>
     <td>
@@ -274,7 +235,9 @@ margin-top:-40px;
 	<button style="width:100px;" class="btn btn-secondary" onclick="GetBandstructures()">Get </button>
 		
 	</td>
-	
+	<td >
+	<span id="dataStatus" style="display: none;"> Getting Data...</span>
+	</td>
 	</tr>
 	</table>
 	</div>

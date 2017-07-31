@@ -250,6 +250,13 @@ function GoToSingleCompound(id)
 			);
 	//location.href =  "\SingleCompound.jsp?Id="+id;
 }
+
+function ViewBandStructure(id)
+{
+	 $('#BandViewer').modal('show');
+     GetBandstructures(id);
+
+}
 </script>
 
 <script id="CompoundListTemplate"  type="text/x-jquery-tmpl">
@@ -268,11 +275,15 @@ function GoToSingleCompound(id)
 	<td>{{html CrystalSystem}}</td>
 	  <td>{{html SpaceGroupName}}</td>
 
-<td><a style="cursor: pointer;" onclick="ViewCIF({{html Id}});">View</a> | <a style="cursor: pointer;"  onclick="DownloadCIF({{if Source == "cod"}}{{html CodID}}
+<!<td><a style="cursor: pointer;" onclick="ViewCIF({{html Id}});">View</a> | <a style="cursor: pointer;"  onclick="DownloadCIF({{if Source == "cod"}}{{html CodID}}
 {{/if}}
 {{if Source == "icsd"}}{{html ICSDID}}
 {{/if}},'{{html Source}}')">Download</a>
 
+</td>
+-->
+<td>
+<a style="cursor: pointer;" onclick="ViewBandStructure({{html Id}});">View</a>
 </td>
 </tr>
 </script>
@@ -537,6 +548,7 @@ display: none;
 
 	
 </div>
+<jsp:include page="BandstructureChart.jsp"/>
 
 </body>
 </html>
