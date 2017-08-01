@@ -19,7 +19,6 @@ $(document).ready(function(){
 	$.get('SingleCompoundServlet', {
 		Id: <%=request.getParameter("Id")%> 
 		 }, function(compound) { 
-			 compound.BSExists=true;
 			 Compound= compound;
 			
 			LoadCif(compound.Cif); 

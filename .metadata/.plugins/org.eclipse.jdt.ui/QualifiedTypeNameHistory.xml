@@ -49,4 +49,5 @@
 <fullyQualifiedTypeName name="fesdweb.data.DosDataService"/>
 <fullyQualifiedTypeName name="fesdweb.model.Dos"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="fesdweb.model.PartialDos"/>
 </qualifiedTypeNameHistroy>
